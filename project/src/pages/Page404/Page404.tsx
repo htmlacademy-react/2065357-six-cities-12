@@ -1,9 +1,14 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import classes from './Page404.module.scss';
 
 function Page404(): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities. Page not found</title>
+      </Helmet>
+
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/Favorites/Favorites';
@@ -14,35 +15,37 @@ type AppScreenProps = {
 
 function App({ placeCardCount }: AppScreenProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<Layout />}>
-          <Route index element={<Main placeCardCount={placeCardCount} />} />
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={AppRoute.Main} element={<Layout />}>
+            <Route index element={<Main placeCardCount={placeCardCount} />} />
+            <Route
+              path={AppRoute.Favorites}
+              element={
+                <PrivateRoute
+                  authorizationStatus={AuthorizationStatus.NoAuth}
+                >
+                  <Favorites />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={AppRoute.Offer}
+              element={<Offer />}
+            />
+            <Route
+              path='*'
+              element={<Page404 />}
+            />
+          </Route>
           <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
-              >
-                <Favorites />
-              </PrivateRoute>
-            }
+            path={AppRoute.Login}
+            element={<Login />}
           />
-          <Route
-            path={AppRoute.Offer}
-            element={<Offer />}
-          />
-          <Route
-            path='*'
-            element={<Page404 />}
-          />
-        </Route>
-        <Route
-          path={AppRoute.Login}
-          element={<Login />}
-        />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
