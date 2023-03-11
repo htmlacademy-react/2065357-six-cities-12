@@ -1,12 +1,8 @@
-import { Helmet } from 'react-helmet-async';
+import Layout from '../../components/layout/layout';
 
 function Favorites(): JSX.Element {
   return (
-    <div className="page">
-      <Helmet>
-        <title>6 cities. Favorites</title>
-      </Helmet>
-
+    <Layout pageTitle='Favorites'>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -141,7 +137,7 @@ function Favorites(): JSX.Element {
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </a>
       </footer>
-    </div>
+    </Layout>
   );
 }
 

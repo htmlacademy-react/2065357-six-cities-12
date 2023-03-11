@@ -1,3 +1,4 @@
+import Layout from '../../components/layout/layout';
 import PlaceCard from '../../components/place-card/place-card';
 
 type MainScreenProps = {
@@ -6,7 +7,7 @@ type MainScreenProps = {
 
 function Main({ placeCardCount }: MainScreenProps): JSX.Element {
   return (
-    <div className="page page--gray page--main">
+    <Layout className="page--gray page--main">
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -75,7 +76,7 @@ function Main({ placeCardCount }: MainScreenProps): JSX.Element {
           </div>
         </div>
       </main>
-    </div>
+    </Layout>
   );
 }
 
