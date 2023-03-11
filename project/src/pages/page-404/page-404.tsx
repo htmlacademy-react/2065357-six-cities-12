@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import classes from './Page404.module.scss';
+import classes from './page-404.module.scss';
 
 function Page404(): JSX.Element {
   return (
@@ -49,11 +49,11 @@ function Page404(): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container cities__places-container--empty container">
-            <section className={`${classes['error']} cities__no-places`}>
-              <div className={classes['error__box']}>
-                <p className={classes['error__status']}>404</p>
-                <p className={classes['error__text']}>Page not found</p>
-                <Link className={classes['error__link']} to='/'>Back to main page</Link>
+            <section className={`${classes.error} cities__no-places`}>
+              <div className={classes.box}>
+                <p className={classes.status}>404</p>
+                <p className={classes.text}>Page not found</p>
+                <Link className={classes.link} to='/'>Back to main page</Link>
               </div>
             </section>
             <div className="cities__right-section"></div>

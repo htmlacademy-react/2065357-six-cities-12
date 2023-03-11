@@ -1,13 +1,13 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import Favorites from '../../pages/Favorites/Favorites';
-import Login from '../../pages/Login/Login';
-import Main from '../../pages/Main/Main';
-import Offer from '../../pages/Offer/Offer';
-import Page404 from '../../pages/Page404/Page404';
-import Layout from '../Layout/Layout';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import Favorites from '../../pages/favorites/favorites';
+import Login from '../../pages/login/login';
+import Main from '../../pages/main/main';
+import Offer from '../../pages/offer/offer';
+import Page404 from '../../pages/page-404/page-404';
+import Layout from '../layout/layout';
+import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
   placeCardCount: number;

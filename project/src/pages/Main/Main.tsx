@@ -1,4 +1,4 @@
-import PlaceCard from '../../components/PlaceCard/PlaceCard';
+import PlaceCard from '../../components/place-card/place-card';
 
 type MainScreenProps = {
   placeCardCount: number;
