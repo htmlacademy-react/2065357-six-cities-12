@@ -10,3 +10,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum PageName {
+  Main = 'cities',
+  Favorites = 'favorites',
+  Offer = 'near-places',
+}

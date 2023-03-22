@@ -1,5 +1,6 @@
 import Layout from '../../components/layout/layout';
 import OffersList from '../../components/offers-list/offers-list';
+import { PageName } from '../../const';
 import { Offers } from '../../types/offer';
 
 type FavoritesProps = {
@@ -38,9 +39,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                       </a>
                     </div>
                   </div>
-                  <div className="favorites__places">
-                    <OffersList offers={offersGroup} />
-                  </div>
+                  <OffersList offers={offersGroup} classNames={'favorites__places'} pageName={PageName.Favorites} />
                 </li>)
               )}
             </ul>

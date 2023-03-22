@@ -1,5 +1,6 @@
 import Layout from '../../components/layout/layout';
 import OffersList from '../../components/offers-list/offers-list';
+import { PageName } from '../../const';
 import { Offers } from '../../types/offer';
 
 type MainProps = {
@@ -67,7 +68,7 @@ function Main({ offers }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList offers={offers} classNames={'cities__places-list places__list'} pageName={PageName.Main} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

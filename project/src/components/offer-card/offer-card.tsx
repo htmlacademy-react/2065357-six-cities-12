@@ -2,16 +2,18 @@ import { Offer } from '../../types/offer';
 import { ucFirst } from '../../utils/common';
 import { convertRaitingToPercent } from '../../utils/offer';
 import cn from 'classnames';
+import { PageName } from '../../const';
 
 type OfferCardProps = {
+  pageName: PageName;
   offer: Offer;
   onCardHover: (activeCard: number | null) => void;
 }
 
-function OfferCard({ offer, onCardHover }: OfferCardProps): JSX.Element {
+function OfferCard({ pageName, offer, onCardHover }: OfferCardProps): JSX.Element {
   return (
     <article
-      className="cities__card place-card"
+      className={`${pageName}__card place-card`}
       onMouseOver={() => onCardHover(offer.id)}
       onMouseOut={() => onCardHover(null)}
     >
@@ -21,9 +23,14 @@ function OfferCard({ offer, onCardHover }: OfferCardProps): JSX.Element {
           <span>Premium</span>
         </div>}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${pageName}__image-wrapper place-card__image-wrapper`}>
         <a href="/#">
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt={offer.title} />
+          <img className="place-card__image"
+            src={offer.previewImage}
+            width={pageName === PageName.Favorites ? '150' : '260'}
+            height={pageName === PageName.Favorites ? '110' : '200'}
+            alt={offer.title}
+          />
         </a>
       </div>
       <div className="place-card__info">
