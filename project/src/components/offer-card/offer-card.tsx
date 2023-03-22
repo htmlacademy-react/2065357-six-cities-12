@@ -3,13 +3,18 @@ import { ucFirst } from '../../utils/common';
 import { convertRaitingToPercent } from '../../utils/offer';
 import cn from 'classnames';
 
-type PlaceCardProps = {
+type OfferCardProps = {
   offer: Offer;
+  onCardHover: (activeCard: number | null) => void;
 }
 
-function PlaceCard({ offer }: PlaceCardProps): JSX.Element {
+function OfferCard({ offer, onCardHover }: OfferCardProps): JSX.Element {
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOver={() => onCardHover(offer.id)}
+      onMouseOut={() => onCardHover(null)}
+    >
 
       {offer.isPremium &&
         <div className="place-card__mark">
@@ -49,4 +54,4 @@ function PlaceCard({ offer }: PlaceCardProps): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default OfferCard;

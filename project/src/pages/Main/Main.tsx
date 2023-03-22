@@ -1,5 +1,5 @@
 import Layout from '../../components/layout/layout';
-import PlaceCard from '../../components/place-card/place-card';
+import OffersList from '../../components/offers-list/offers-list';
 import { Offers } from '../../types/offer';
 
 type MainProps = {
@@ -67,9 +67,7 @@ function Main({ offers }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <PlaceCard offer={offer} key={offer.id} />)}
-              </div>
+              <OffersList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

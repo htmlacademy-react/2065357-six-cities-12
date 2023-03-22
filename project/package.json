@@ -32,6 +32,9 @@
       "react-app/jest",
       "htmlacademy/react-typescript"
     ],
+    "rules": {
+      "no-console": "warn"
+    },
     "parserOptions": {
       "project": [
         "tsconfig.json"
