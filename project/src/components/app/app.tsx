@@ -11,19 +11,18 @@ import { Offers } from '../../types/offer';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  placeCardCount: number;
   offers: Offers;
   comments: Comments;
 }
 
-function App({ placeCardCount, offers, comments }: AppProps): JSX.Element {
+function App({ offers, comments }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main placeCardCount={placeCardCount} offers={offers} />}
+            element={<Main offers={offers} />}
           />
           <Route
             path={AppRoute.Favorites}
