@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { mockComments } from './mocks/comments';
+import { mockOffers } from './mocks/offer';
 
 const Setting = {
   PlaceCardCount: 5,
@@ -12,6 +14,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placeCardCount={Setting.PlaceCardCount} />
+    <App
+      offers={mockOffers}
+      comments={mockComments}
+      placeCardCount={Setting.PlaceCardCount}
+    />
   </React.StrictMode>,
 );

@@ -1,11 +1,13 @@
 import Layout from '../../components/layout/layout';
 import PlaceCard from '../../components/place-card/place-card';
+import { Offers } from '../../types/offer';
 
-type MainScreenProps = {
+type MainProps = {
   placeCardCount: number;
+  offers: Offers;
 }
 
-function Main({ placeCardCount }: MainScreenProps): JSX.Element {
+function Main({ placeCardCount, offers }: MainProps): JSX.Element {
   return (
     <Layout className="page--gray page--main">
       <main className="page__main page__main--index">
