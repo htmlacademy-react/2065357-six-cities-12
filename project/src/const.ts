@@ -10,3 +10,18 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum OfferCardType {
+  Main = 'cities',
+  Favorites = 'favorites',
+  Offer = 'near-places',
+}
+
+export const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+];

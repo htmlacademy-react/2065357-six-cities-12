@@ -2,7 +2,8 @@ import Layout from '../../components/layout/layout';
 
 function Login(): JSX.Element {
   return (
-    <Layout pageTitle='Login'
+    <Layout
+      pageTitle="Login"
       className="page--gray page--login"
       hasNav={false}
     >
