@@ -1,37 +1,53 @@
 import { Offer } from '../../types/offer';
 import { ucFirst } from '../../utils/common';
-import { convertRaitingToPercent } from '../../utils/offer';
-import cn from 'classnames';
-import { PageName } from '../../const';
+import { convertRatingToPercent } from '../../utils/offer';
+import { AppRoute, OfferCardType } from '../../const';
+import { generatePath, Link } from 'react-router-dom';
+import PremiumMark from '../premium-mark/premium-mark';
+import FavoriteButton from '../favorite-btn/favorite-btn';
 
 type OfferCardProps = {
-  pageName: PageName;
+  offerCardType: OfferCardType;
   offer: Offer;
   onCardHover: (activeCard: number | null) => void;
 }
 
-function OfferCard({ pageName, offer, onCardHover }: OfferCardProps): JSX.Element {
+const sizes = {
+  [OfferCardType.Main]: {
+    width: 260,
+    height: 200
+  },
+  [OfferCardType.Favorites]: {
+    width: 150,
+    height: 110
+  },
+  [OfferCardType.Offer]: {
+    width: 260,
+    height: 200
+  }
+};
+
+function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.Element {
+  const size = sizes[offerCardType];
+
   return (
     <article
-      className={`${pageName}__card place-card`}
+      className={`${offerCardType}__card place-card`}
       onMouseOver={() => onCardHover(offer.id)}
       onMouseOut={() => onCardHover(null)}
     >
 
-      {offer.isPremium &&
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>}
+      {offer.isPremium && <PremiumMark className='place-card__mark' />}
 
-      <div className={`${pageName}__image-wrapper place-card__image-wrapper`}>
-        <a href="/#">
+      <div className={`${offerCardType}__image-wrapper place-card__image-wrapper`}>
+        <Link to={generatePath(AppRoute.Offer, { id: `${offer.id}` })}>
           <img className="place-card__image"
             src={offer.previewImage}
-            width={pageName === PageName.Favorites ? '150' : '260'}
-            height={pageName === PageName.Favorites ? '110' : '200'}
+            width={size.width}
+            height={size.height}
             alt={offer.title}
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -39,21 +55,18 @@ function OfferCard({ pageName, offer, onCardHover }: OfferCardProps): JSX.Elemen
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={cn('place-card__bookmark-button button', offer.isFavorite && 'place-card__bookmark-button--active')} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+
+          <FavoriteButton className='place-card' isFavorite={offer.isFavorite} />
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${convertRaitingToPercent(offer.rating)}%` }}></span>
+            <span style={{ width: `${convertRatingToPercent(offer.rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{offer.title}</a>
+          <Link to={AppRoute.Offer}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{ucFirst(offer.type)}</p>
       </div>

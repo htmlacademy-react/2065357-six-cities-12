@@ -1,3 +1,5 @@
-const convertRaitingToPercent = (raiting: number): number => Math.round(raiting) * 20;
+const STARS_COUNT = 5;
 
-export { convertRaitingToPercent };
+const convertRatingToPercent = (rating: number): number => Math.round(rating) * (100 / STARS_COUNT);
+
+export { convertRatingToPercent };

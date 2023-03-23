@@ -11,8 +11,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum PageName {
+export enum OfferCardType {
   Main = 'cities',
   Favorites = 'favorites',
   Offer = 'near-places',
 }
+
+export const cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+];

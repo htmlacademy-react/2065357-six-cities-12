@@ -1,6 +1,6 @@
-import { Comments } from '../types/comments';
+import { Comment } from '../types/comment';
 
-const mockComments: Comments = [
+const mockComments: Comment[] = [
   {
     'id': 1,
     'user': {

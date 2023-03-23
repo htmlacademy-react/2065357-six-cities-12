@@ -1,18 +1,19 @@
 import Layout from '../../components/layout/layout';
+import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import { PageName } from '../../const';
-import { Offers } from '../../types/offer';
+import { OfferCardType } from '../../const';
+import { Offer } from '../../types/offer';
 
 type FavoritesProps = {
-  offers: Offers;
+  offers: Offer[];
 }
 
 type OffersByCityGroup = {
-  [city: string]: Offers;
+  [city: string]: Offer[];
 }
 
-function Favorites({ offers }: FavoritesProps): JSX.Element {
-  const offersByCity = offers.reduce((cityGroup: OffersByCityGroup, offer) => {
+const getOffersByCityGroup = (offers: Offer[]) =>
+  offers.reduce((cityGroup: OffersByCityGroup, offer) => {
     const city = offer.city.name;
 
     if (!cityGroup[city]) {
@@ -22,6 +23,9 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
 
     return cityGroup;
   }, {});
+
+function Favorites({ offers }: FavoritesProps): JSX.Element {
+  const offersByCity = getOffersByCityGroup(offers);
 
   return (
     <Layout pageTitle='Favorites'>
@@ -39,7 +43,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                       </a>
                     </div>
                   </div>
-                  <OffersList offers={offersGroup} classNames={'favorites__places'} pageName={PageName.Favorites} />
+                  <OffersList offers={offersGroup} classNames={'favorites__places'} offerCardType={OfferCardType.Favorites} />
                 </li>)
               )}
             </ul>
@@ -47,9 +51,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        <Logo type='footer' />
       </footer>
     </Layout>
   );

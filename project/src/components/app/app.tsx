@@ -4,15 +4,15 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
-import Offer from '../../pages/offer/offer';
+import OfferPage from '../../pages/offer/offer';
 import Page404 from '../../pages/page-404/page-404';
-import { Comments } from '../../types/comments';
-import { Offers } from '../../types/offer';
+import { Comment } from '../../types/comment';
+import { Offer } from '../../types/offer';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  offers: Offers;
-  comments: Comments;
+  offers: Offer[];
+  comments: Comment[];
 }
 
 function App({ offers, comments }: AppProps): JSX.Element {
@@ -36,7 +36,7 @@ function App({ offers, comments }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<Offer />}
+            element={<OfferPage offers={offers} comments={comments} />}
           />
           <Route
             path='*'
