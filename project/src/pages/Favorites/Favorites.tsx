@@ -28,7 +28,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
   const offersByCity = getOffersByCityGroup(offers);
 
   return (
-    <Layout pageTitle='Favorites'>
+    <Layout pageTitle="Favorites">
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -43,7 +43,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
                       </a>
                     </div>
                   </div>
-                  <OffersList offers={offersGroup} classNames={'favorites__places'} offerCardType={OfferCardType.Favorites} />
+                  <OffersList offers={offersGroup} classNames="favorites__places" offerCardType={OfferCardType.Favorites} />
                 </li>)
               )}
             </ul>
@@ -51,7 +51,7 @@ function Favorites({ offers }: FavoritesProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <Logo type='footer' />
+        <Logo type="footer" />
       </footer>
     </Layout>
   );

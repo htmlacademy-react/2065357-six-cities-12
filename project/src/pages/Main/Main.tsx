@@ -3,7 +3,7 @@ import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
-import { cities, OfferCardType } from '../../const';
+import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
 
 type MainProps = {
@@ -16,7 +16,7 @@ function Main({ offers }: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <Tabs cities={cities} />
+        <Tabs />
 
         <div className="cities">
           <div className="cities__places-container container">
@@ -26,11 +26,11 @@ function Main({ offers }: MainProps): JSX.Element {
 
               <Sort />
 
-              <OffersList offers={offers} classNames={'cities__places-list places__list'} offerCardType={OfferCardType.Main} />
+              <OffersList offers={offers} classNames="cities__places-list places__list" offerCardType={OfferCardType.Main} />
 
             </section>
             <div className="cities__right-section">
-              <Map className='cities' />
+              <Map className="cities" />
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ function Layout({ pageTitle = '', className = '', hasNav = true, children }: Lay
   return (
     <div className={`page ${className}`}>
       <Helmet>
-        <title>6 cities{` ${pageTitle}`}</title>
+        <title>6 cities {pageTitle}</title>
       </Helmet>
       <Header hasNav={hasNav} />
       {children}

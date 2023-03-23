@@ -3,8 +3,8 @@ import { ucFirst } from '../../utils/common';
 import { convertRatingToPercent } from '../../utils/offer';
 import { AppRoute, OfferCardType } from '../../const';
 import { generatePath, Link } from 'react-router-dom';
-import PremiumMark from '../premium-mark/premium-mark';
 import FavoriteButton from '../favorite-btn/favorite-btn';
+import Mark from '../mark/mark';
 
 type OfferCardProps = {
   offerCardType: OfferCardType;
@@ -37,7 +37,7 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
       onMouseOut={() => onCardHover(null)}
     >
 
-      {offer.isPremium && <PremiumMark className='place-card__mark' />}
+      {offer.isPremium && <Mark className="place-card__mark" text="Premium" />}
 
       <div className={`${offerCardType}__image-wrapper place-card__image-wrapper`}>
         <Link to={generatePath(AppRoute.Offer, { id: `${offer.id}` })}>
@@ -56,7 +56,7 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <FavoriteButton className='place-card' isFavorite={offer.isFavorite} />
+          <FavoriteButton className="place-card" isFavorite={offer.isFavorite} />
 
         </div>
         <div className="place-card__rating rating">

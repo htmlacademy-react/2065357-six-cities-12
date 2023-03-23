@@ -4,7 +4,7 @@ import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import { Offer } from '../../types/offer';
 import { ucFirst } from '../../utils/common';
 import { convertRatingToPercent } from '../../utils/offer';
-import PremiumMark from '../../components/premium-mark/premium-mark';
+import Mark from '../../components/mark/mark';
 import FavoriteButton from '../../components/favorite-btn/favorite-btn';
 import Map from '../../components/map/map';
 import { Comment } from '../../types/comment';
@@ -38,14 +38,14 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
           <div className="property__container container">
             <div className="property__wrapper">
 
-              {offer.isPremium && <PremiumMark className='property__mark' />}
+              {offer.isPremium && <Mark className="property__mark" text="Premium" />}
 
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
 
-                <FavoriteButton className='property' isFavorite={offer.isFavorite} />
+                <FavoriteButton className="property" isFavorite={offer.isFavorite} />
 
               </div>
               <div className="property__rating rating">
@@ -101,13 +101,13 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
 
             </div>
           </div>
-          <Map className='property' />
+          <Map className="property" />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
-              classNames='near-places__list places__list'
+              classNames="near-places__list places__list"
               offers={offers.slice(0, 3)}
               offerCardType={OfferCardType.Offer}
             />

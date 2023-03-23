@@ -17,7 +17,7 @@ export enum OfferCardType {
   Offer = 'near-places',
 }
 
-export const cities = [
+export const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',

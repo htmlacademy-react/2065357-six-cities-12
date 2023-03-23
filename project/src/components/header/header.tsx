@@ -12,7 +12,7 @@ function Header({ hasNav = true }: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo type='header' />
+            <Logo type="header" />
           </div>
           {hasNav && (
             <nav className="header__nav">

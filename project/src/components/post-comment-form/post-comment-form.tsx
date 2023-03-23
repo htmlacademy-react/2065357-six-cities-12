@@ -10,9 +10,15 @@ const RATING_TITLES = [
 
 function PostCommentForm(): JSX.Element {
   const [formData, setFormData] = useState({
-    rating: 0,
+    rating: '0',
     comment: ''
   });
+
+  const formDataChangeHandler = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { name, value } = evt.target;
+
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -29,10 +35,8 @@ function PostCommentForm(): JSX.Element {
                 value={reversedIndex}
                 id={`${reversedIndex}-stars`}
                 type="radio"
-                checked={formData.rating === reversedIndex}
-                onChange={({target}: ChangeEvent<HTMLInputElement>) => {
-                  setFormData({...formData, rating: +target.value});
-                }}
+                checked={+formData.rating === reversedIndex}
+                onChange={formDataChangeHandler}
               />
               <label
                 htmlFor={`${reversedIndex}-stars`}
@@ -51,9 +55,7 @@ function PostCommentForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={({target}: ChangeEvent<HTMLTextAreaElement>) => {
-          setFormData({...formData, comment: target.value});
-        }}
+        onChange={formDataChangeHandler}
       >
       </textarea>
       <div className="reviews__button-wrapper">

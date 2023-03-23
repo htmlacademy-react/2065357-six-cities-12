@@ -1,5 +1,5 @@
 import { Comment } from '../../types/comment';
-import { convertDate } from '../../utils/comment';
+import { convertDate, convertDateForDateTime } from '../../utils/comment';
 import { convertRatingToPercent } from '../../utils/offer';
 
 type CommentProp = {
@@ -27,7 +27,7 @@ function CommentItem({ comment }: CommentProp): JSX.Element {
         <p className="reviews__text">
           {comment.comment}
         </p>
-        <time className="reviews__time" dateTime={comment.date}>{convertDate(comment.date)}</time>
+        <time className="reviews__time" dateTime={convertDateForDateTime(comment.date)}>{convertDate(comment.date)}</time>
       </div>
     </li>
   );
