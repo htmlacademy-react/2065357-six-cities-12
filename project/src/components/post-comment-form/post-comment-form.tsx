@@ -11,7 +11,7 @@ const RATING_TITLES = [
 function PostCommentForm(): JSX.Element {
   const [formData, setFormData] = useState({
     rating: '0',
-    comment: ''
+    review: ''
   });
 
   const formDataChangeHandler = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
