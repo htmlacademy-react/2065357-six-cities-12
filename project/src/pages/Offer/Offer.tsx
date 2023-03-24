@@ -101,7 +101,7 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
 
             </div>
           </div>
-          <Map className="property" city={offers[0].city.location} offers={offers} />
+          <Map className="property" city={offers[0].city.location} offers={offers.slice(0, 3)} />
         </section>
         <div className="container">
           <section className="near-places places">
