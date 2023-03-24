@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
@@ -11,6 +12,12 @@ type MainProps = {
 }
 
 function Main({ offers }: MainProps): JSX.Element {
+  const [selectedOffer, setSelectedOfferId] = useState<number | null>(null);
+
+  const onCardHover = (offerId: number | null): void => {
+    setSelectedOfferId(offerId);
+  };
+
   return (
     <Layout className="page--gray page--main">
       <main className="page__main page__main--index">
@@ -26,11 +33,21 @@ function Main({ offers }: MainProps): JSX.Element {
 
               <Sort />
 
-              <OffersList offers={offers} classNames="cities__places-list places__list" offerCardType={OfferCardType.Main} />
+              <OffersList
+                offers={offers}
+                classNames="cities__places-list places__list"
+                offerCardType={OfferCardType.Main}
+                onCardHover={onCardHover}
+              />
 
             </section>
             <div className="cities__right-section">
-              <Map className="cities" />
+              <Map
+                className="cities"
+                city={offers[0].city.location}
+                offers={offers}
+                selectedOfferId={selectedOffer}
+              />
             </div>
           </div>
         </div>

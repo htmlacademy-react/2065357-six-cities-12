@@ -9,7 +9,7 @@ import Mark from '../mark/mark';
 type OfferCardProps = {
   offerCardType: OfferCardType;
   offer: Offer;
-  onCardHover: (activeCard: number | null) => void;
+  onCardHover?: (offerId: number | null) => void;
 }
 
 const sizes = {
@@ -33,8 +33,8 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
   return (
     <article
       className={`${offerCardType}__card place-card`}
-      onMouseOver={() => onCardHover(offer.id)}
-      onMouseOut={() => onCardHover(null)}
+      onMouseOver={() => onCardHover?.(offer.id)}
+      onMouseOut={() => onCardHover?.(null)}
     >
 
       {offer.isPremium && <Mark className="place-card__mark" text="Premium" />}
