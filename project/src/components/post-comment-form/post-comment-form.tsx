@@ -14,7 +14,7 @@ function PostCommentForm(): JSX.Element {
     review: ''
   });
 
-  const formDataChangeHandler = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = evt.target;
 
     setFormData({ ...formData, [name]: value });
@@ -36,7 +36,7 @@ function PostCommentForm(): JSX.Element {
                 id={`${reversedIndex}-stars`}
                 type="radio"
                 checked={+formData.rating === reversedIndex}
-                onChange={formDataChangeHandler}
+                onChange={handleChange}
               />
               <label
                 htmlFor={`${reversedIndex}-stars`}
@@ -55,7 +55,7 @@ function PostCommentForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={formDataChangeHandler}
+        onChange={handleChange}
       >
       </textarea>
       <div className="reviews__button-wrapper">
