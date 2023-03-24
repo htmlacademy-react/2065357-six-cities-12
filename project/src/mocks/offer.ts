@@ -3,11 +3,11 @@ import { Offer } from '../types/offer';
 const mockOffers: Offer[] = [
   {
     'city': {
-      'name': 'Dusseldorf',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 51.225402,
-        'longitude': 6.776314,
-        'zoom': 13
+        'latitude': 52.3909553943508,
+        'longitude': 4.85309666406198,
+        'zoom': 10
       }
     },
     'previewImage': 'https://12.react.pages.academy/static/hotel/8.jpg',
@@ -61,11 +61,11 @@ const mockOffers: Offer[] = [
   },
   {
     'city': {
-      'name': 'Dusseldorf',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 51.225402,
-        'longitude': 6.776314,
-        'zoom': 13
+        'latitude': 52.3809553943508,
+        'longitude': 4.939309666406198,
+        'zoom': 10
       }
     },
     'previewImage': 'https://12.react.pages.academy/static/hotel/18.jpg',
@@ -115,11 +115,11 @@ const mockOffers: Offer[] = [
   },
   {
     'city': {
-      'name': 'Dusseldorf',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 51.225402,
-        'longitude': 6.776314,
-        'zoom': 13
+        'latitude': 52.3909553943508,
+        'longitude': 4.929309666406198,
+        'zoom': 10
       }
     },
     'previewImage': 'https://12.react.pages.academy/static/hotel/17.jpg',
@@ -173,11 +173,11 @@ const mockOffers: Offer[] = [
   },
   {
     'city': {
-      'name': 'Brussels',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 50.846557,
-        'longitude': 4.351697,
-        'zoom': 13
+        'latitude': 52.3609553943508,
+        'longitude': 4.85309666406198,
+        'zoom': 10
       }
     },
     'previewImage': 'https://12.react.pages.academy/static/hotel/14.jpg',
@@ -221,66 +221,6 @@ const mockOffers: Offer[] = [
       'zoom': 16
     },
     'id': 4
-  },
-  {
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'previewImage': 'https://12.react.pages.academy/static/hotel/6.jpg',
-    'images': [
-      'https://12.react.pages.academy/static/hotel/9.jpg',
-      'https://12.react.pages.academy/static/hotel/7.jpg',
-      'https://12.react.pages.academy/static/hotel/17.jpg',
-      'https://12.react.pages.academy/static/hotel/1.jpg',
-      'https://12.react.pages.academy/static/hotel/10.jpg',
-      'https://12.react.pages.academy/static/hotel/18.jpg',
-      'https://12.react.pages.academy/static/hotel/19.jpg',
-      'https://12.react.pages.academy/static/hotel/20.jpg',
-      'https://12.react.pages.academy/static/hotel/8.jpg',
-      'https://12.react.pages.academy/static/hotel/12.jpg',
-      'https://12.react.pages.academy/static/hotel/6.jpg',
-      'https://12.react.pages.academy/static/hotel/3.jpg',
-      'https://12.react.pages.academy/static/hotel/5.jpg',
-      'https://12.react.pages.academy/static/hotel/4.jpg'
-    ],
-    'title': 'Nice, cozy, warm big bed apartment',
-    'isFavorite': false,
-    'isPremium': false,
-    'rating': 2.3,
-    'type': 'hotel',
-    'bedrooms': 3,
-    'maxAdults': 7,
-    'price': 192,
-    'goods': [
-      'Breakfast',
-      'Fridge',
-      'Coffee machine',
-      'Dishwasher',
-      'Laptop friendly workspace',
-      'Air conditioning',
-      'Baby seat',
-      'Washing machine',
-      'Washer',
-      'Towels'
-    ],
-    'host': {
-      'id': 25,
-      'name': 'Angelina',
-      'isPro': true,
-      'avatarUrl': 'img/avatar-angelina.jpg'
-    },
-    'description': 'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
-    'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
-      'zoom': 16
-    },
-    'id': 5
   }
 ];
 
