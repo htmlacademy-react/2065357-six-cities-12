@@ -14,6 +14,8 @@ import { OfferCardType } from '../../const';
 import { Navigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
+const NEAR_OFFERS_COUNT = 3;
+
 type OfferProps = {
   offers: Offer[];
   comments: Comment[];
@@ -27,6 +29,18 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
   if (!offer) {
     return (<Navigate to='*' />);
   }
+
+  const nearOffers = offers.reduce((acc: Offer[], offerItem) => {
+    if (acc?.length === NEAR_OFFERS_COUNT) {
+      return acc;
+    }
+
+    if (offerItem !== offer) {
+      acc?.push(offerItem);
+    }
+
+    return acc;
+  }, []);
 
   return (
     <Layout pageTitle={offer.title}>
@@ -101,14 +115,14 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
 
             </div>
           </div>
-          <Map className="property" city={offers[0].city.location} offers={offers.slice(0, 3)} />
+          <Map className="property" location={offers[0].city.location} offers={offers} selectedOfferId={offer.id} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
               classNames="near-places__list places__list"
-              offers={offers.slice(0, 3)}
+              offers={nearOffers}
               offerCardType={OfferCardType.Offer}
             />
           </section>

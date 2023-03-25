@@ -6,9 +6,9 @@ import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   className: string;
-  city: Location;
+  location: Location;
   offers: Offer[];
-  selectedOfferId?: number | null;
+  selectedOfferId: number | null;
 }
 
 const defaultCustomIcon = new Icon({
@@ -23,9 +23,9 @@ const currentCustomIcon = new Icon({
   iconAnchor: [13.5, 39]
 });
 
-function Map({ className, city, offers, selectedOfferId }: MapProps): JSX.Element {
+function Map({ className, location, offers, selectedOfferId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, location);
 
   useEffect(() => {
     if (map) {
