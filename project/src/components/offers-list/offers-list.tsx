@@ -12,8 +12,13 @@ type OffersListProps = {
 function OffersList({ offers, classNames, offerCardType, onCardHover }: OffersListProps): JSX.Element {
   return (
     <div className={classNames}>
-      {offers.map((offer) =>
-        <OfferCard offerCardType={offerCardType} offer={offer} key={offer.id} onCardHover={onCardHover} />)}
+      {offers.map((offer) => (
+        <OfferCard
+          offerCardType={offerCardType}
+          offer={offer}
+          key={offer.id}
+          onCardHover={onCardHover}
+        />))}
     </div>
   );
 }
