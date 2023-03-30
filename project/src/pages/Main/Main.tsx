@@ -8,11 +8,12 @@ import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
 
 type MainProps = {
+  currentCity: string;
   offers: Offer[];
 }
 
-function Main({ offers }: MainProps): JSX.Element {
-  const [selectedOffer, setSelectedOfferId] = useState<number | null>(null);
+function Main({ currentCity, offers }: MainProps): JSX.Element {
+  const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
@@ -23,13 +24,13 @@ function Main({ offers }: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <Tabs />
+        <Tabs currentCity={currentCity} />
 
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
 
               <Sort />
 
@@ -46,7 +47,7 @@ function Main({ offers }: MainProps): JSX.Element {
                 className="cities"
                 location={offers[0].city.location}
                 offers={offers}
-                selectedOfferId={selectedOffer}
+                selectedOfferId={selectedOfferId}
               />
             </div>
           </div>

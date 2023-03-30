@@ -7,7 +7,7 @@ const LAYER_SETTING = {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 };
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location): Map | null {
+function useMap(mapRef: MutableRefObject<HTMLElement | null>, location: Location): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
@@ -15,15 +15,15 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location): M
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.latitude,
-          lng: city.longitude
+          lat: location.latitude,
+          lng: location.longitude
         },
-        zoom: city.zoom
+        zoom: location.zoom
       });
 
       const layer = new TileLayer(
         LAYER_SETTING.url,
-        {attribution: LAYER_SETTING.attribution}
+        { attribution: LAYER_SETTING.attribution }
       );
 
       instance.addLayer(layer);
@@ -31,7 +31,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: Location): M
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, location]);
 
   return map;
 }

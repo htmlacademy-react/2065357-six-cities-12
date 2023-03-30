@@ -42,6 +42,8 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
     return acc;
   }, []);
 
+  const renderedOffers: Offer[] = [...nearOffers, offer];
+
   return (
     <Layout pageTitle={offer.title}>
       <main className="page__main page__main--property">
@@ -115,7 +117,7 @@ function OfferPage({ offers, comments }: OfferProps): JSX.Element {
 
             </div>
           </div>
-          <Map className="property" location={offers[0].city.location} offers={offers} selectedOfferId={offer.id} />
+          <Map className="property" location={offers[0].city.location} offers={renderedOffers} selectedOfferId={offer.id} />
         </section>
         <div className="container">
           <section className="near-places places">
