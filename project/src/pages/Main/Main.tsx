@@ -5,18 +5,15 @@ import OffersList from '../../components/offers-list/offers-list';
 import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
 import { OfferCardType } from '../../const';
-import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { Offer } from '../../types/offer';
-import { getOffersByCity } from '../../utils/common';
 
 type MainProps = {
+  currentCity?: string;
   offers: Offer[];
 }
 
-function Main({ offers }: MainProps): JSX.Element {
+function Main({ currentCity, offers }: MainProps): JSX.Element {
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
-  const currentCity = useAppSelector((state) => state.city);
-  const offersByCity = getOffersByCity(currentCity, offers);
 
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
@@ -33,12 +30,12 @@ function Main({ offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in {currentCity}</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
 
               <Sort />
 
               <OffersList
-                offers={offersByCity}
+                offers={offers}
                 classNames="cities__places-list places__list"
                 offerCardType={OfferCardType.Main}
                 onCardHover={onCardHover}
@@ -48,8 +45,8 @@ function Main({ offers }: MainProps): JSX.Element {
             <div className="cities__right-section">
               <Map
                 className="cities"
-                location={offersByCity[0].city.location}
-                offers={offersByCity}
+                location={offers[0].city.location}
+                offers={offers}
                 selectedOfferId={selectedOfferId}
               />
             </div>
