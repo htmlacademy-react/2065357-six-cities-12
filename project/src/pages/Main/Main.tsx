@@ -8,7 +8,7 @@ import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
 
 type MainProps = {
-  currentCity?: string;
+  currentCity: string;
   offers: Offer[];
 }
 
