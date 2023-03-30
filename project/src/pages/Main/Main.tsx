@@ -9,6 +9,8 @@ import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { Offer } from '../../types/offer';
 import { getOffersByCity } from '../../utils/common';
 import { getSortedOffers } from '../../utils/sort';
+import cn from 'classnames';
+import EmptyMessage from '../../components/empty-message/empty-message';
 
 type MainProps = {
   offers: Offer[];
@@ -23,45 +25,51 @@ function Main({ offers }: MainProps): JSX.Element {
   const offersByCity = getOffersByCity(currentCity, offers);
   const sortedOffers = getSortedOffers(offersByCity, currentSortType);
 
+  const isEmpty = !offersByCity.length;
+
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
   };
 
   return (
     <Layout className="page--gray page--main">
-      <main className="page__main page__main--index">
+      <main className={cn('page__main page__main--index', isEmpty && 'page__main--index-empty')}>
         <h1 className="visually-hidden">Cities</h1>
 
         <Tabs currentCity={currentCity} />
 
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
+          <div className={cn('cities__places-container container', isEmpty && 'cities__places-container--empty')}>
+            {isEmpty ?
+              <EmptyMessage currentCity={currentCity} />
+              : (
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
 
-              <Sort currentSortType={currentSortType} />
+                  <Sort currentSortType={currentSortType} />
 
-              <OffersList
-                offers={sortedOffers}
-                classNames="cities__places-list places__list"
-                offerCardType={OfferCardType.Main}
-                onCardHover={onCardHover}
-              />
+                  <OffersList
+                    offers={sortedOffers}
+                    classNames="cities__places-list places__list"
+                    offerCardType={OfferCardType.Main}
+                    onCardHover={onCardHover}
+                  />
+                </section>)}
 
-            </section>
             <div className="cities__right-section">
-              <Map
-                className="cities"
-                location={sortedOffers[0].city.location}
-                offers={sortedOffers}
-                selectedOfferId={selectedOfferId}
-              />
+              {!isEmpty && (
+                <Map
+                  className="cities"
+                  location={sortedOffers[0].city.location}
+                  offers={sortedOffers}
+                  selectedOfferId={selectedOfferId}
+                />)}
             </div>
           </div>
         </div>
       </main>
-    </Layout>
+    </Layout >
   );
 }
 
