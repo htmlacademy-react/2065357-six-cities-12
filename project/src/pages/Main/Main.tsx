@@ -8,6 +8,7 @@ import { OfferCardType } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { Offer } from '../../types/offer';
 import { getOffersByCity } from '../../utils/common';
+import { getSortedOffers } from '../../utils/sort';
 
 type MainProps = {
   offers: Offer[];
@@ -17,7 +18,10 @@ function Main({ offers }: MainProps): JSX.Element {
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
   const currentCity = useAppSelector((state) => state.city);
+  const currentSortType = useAppSelector((state) => state.sortType);
+
   const offersByCity = getOffersByCity(currentCity, offers);
+  const sortedOffers = getSortedOffers(offersByCity, currentSortType);
 
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
@@ -34,12 +38,12 @@ function Main({ offers }: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersByCity.length} places to stay in {currentCity}</b>
+              <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
 
-              <Sort />
+              <Sort currentSortType={currentSortType} />
 
               <OffersList
-                offers={offersByCity}
+                offers={sortedOffers}
                 classNames="cities__places-list places__list"
                 offerCardType={OfferCardType.Main}
                 onCardHover={onCardHover}
@@ -49,8 +53,8 @@ function Main({ offers }: MainProps): JSX.Element {
             <div className="cities__right-section">
               <Map
                 className="cities"
-                location={offersByCity[0].city.location}
-                offers={offersByCity}
+                location={sortedOffers[0].city.location}
+                offers={sortedOffers}
                 selectedOfferId={selectedOfferId}
               />
             </div>
