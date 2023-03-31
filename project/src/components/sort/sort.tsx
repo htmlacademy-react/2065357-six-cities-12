@@ -24,14 +24,13 @@ function Sort({ currentSortType }: SortProps): JSX.Element {
         className="places__sorting-type"
         tabIndex={0}
         onClick={() => setIsOpen(!isOpen)}
-        ref={sortRef}
       >
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={cn('places__options places__options--custom', isOpen && 'places__options--opened')}>
+      <ul className={cn('places__options places__options--custom', isOpen && 'places__options--opened')} ref={sortRef}>
         {Object.values(SortType).map((sortType) => (
           <li
             className={cn('places__option', { 'places__option--active': sortType === currentSortType })}
