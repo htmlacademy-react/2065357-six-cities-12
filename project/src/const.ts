@@ -17,6 +17,13 @@ export enum OfferCardType {
   Offer = 'near-places',
 }
 
+export enum SortType {
+  Popular = 'Popular',
+  PriceToHigh = 'Price: low to high',
+  PriceToLow = 'Price: high to low',
+  Rating = 'Top rated first'
+}
+
 export const CITIES = [
   'Paris',
   'Cologne',
