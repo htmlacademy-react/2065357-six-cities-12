@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import cn from 'classnames';
 import { SortType } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { changeSortType } from '../../store/action';
 import { useOnClickOutside } from '../../hooks/use-on-click-outside/use-on-click-outside';
+import { changeSortType } from '../../store/reducers/offer-slice';
 
 type SortProps = {
   currentSortType: SortType;
