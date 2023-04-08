@@ -11,6 +11,7 @@ import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
+import ErrorMessage from '../../components/error-message/error-message';
 
 function Main(): JSX.Element {
   const { offers, status } = useAppSelector((state) => state.appData);
@@ -30,6 +31,10 @@ function Main(): JSX.Element {
 
   if (status === Status.Loading) {
     return <Loader />;
+  }
+
+  if (status === Status.Error) {
+    return <ErrorMessage />;
   }
 
   return (
