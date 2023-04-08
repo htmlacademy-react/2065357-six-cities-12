@@ -4,26 +4,24 @@ import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
-import { OfferCardType } from '../../const';
+import { OfferCardType, Status } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { Offer } from '../../types/offer';
 import { getOffersByCity } from '../../utils/common';
 import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
+import Loader from '../../components/loader/loader';
+import ErrorMessage from '../../components/error-message/error-message';
 
-type MainProps = {
-  offers: Offer[];
-}
-
-function Main({ offers }: MainProps): JSX.Element {
+function Main(): JSX.Element {
+  const { offers, status } = useAppSelector((state) => state.appData);
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
-  const currentCity = useAppSelector((state) => state.city);
-  const currentSortType = useAppSelector((state) => state.sortType);
+  const { city } = useAppSelector((state) => state.offerReducer);
+  const { sortType } = useAppSelector((state) => state.offerReducer);
 
-  const offersByCity = getOffersByCity(currentCity, offers);
-  const sortedOffers = getSortedOffers(offersByCity, currentSortType);
+  const offersByCity = getOffersByCity(city, offers);
+  const sortedOffers = getSortedOffers(offersByCity, sortType);
 
   const isEmpty = !offersByCity.length;
 
@@ -31,23 +29,31 @@ function Main({ offers }: MainProps): JSX.Element {
     setSelectedOfferId(offerId);
   };
 
+  if (status === Status.Loading) {
+    return <Loader />;
+  }
+
+  if (status === Status.Error) {
+    return <ErrorMessage />;
+  }
+
   return (
     <Layout className="page--gray page--main">
       <main className={cn('page__main page__main--index', isEmpty && 'page__main--index-empty')}>
         <h1 className="visually-hidden">Cities</h1>
 
-        <Tabs currentCity={currentCity} />
+        <Tabs currentCity={city} />
 
         <div className="cities">
           <div className={cn('cities__places-container container', isEmpty && 'cities__places-container--empty')}>
             {isEmpty ?
-              <EmptyMessage currentCity={currentCity} />
+              <EmptyMessage currentCity={city} />
               : (
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
+                  <b className="places__found">{sortedOffers.length} places to stay in {city}</b>
 
-                  <Sort currentSortType={currentSortType} />
+                  <Sort currentSortType={sortType} />
 
                   <OffersList
                     offers={sortedOffers}

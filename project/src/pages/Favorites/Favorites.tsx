@@ -2,11 +2,8 @@ import Layout from '../../components/layout/layout';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { Offer } from '../../types/offer';
-
-type FavoritesProps = {
-  offers: Offer[];
-}
 
 type OffersByCityGroup = {
   [city: string]: Offer[];
@@ -24,7 +21,8 @@ const getOffersByCityGroup = (offers: Offer[]) =>
     return cityGroup;
   }, {});
 
-function Favorites({ offers }: FavoritesProps): JSX.Element {
+function Favorites(): JSX.Element {
+  const { offers } = useAppSelector((state) => state.appData);
   const offersByCity = getOffersByCityGroup(offers);
 
   return (
