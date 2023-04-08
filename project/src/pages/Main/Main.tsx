@@ -4,15 +4,16 @@ import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
-import { OfferCardType } from '../../const';
+import { OfferCardType, Status } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getOffersByCity } from '../../utils/common';
 import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
+import Loader from '../../components/loader/loader';
 
 function Main(): JSX.Element {
-  const { offers } = useAppSelector((state) => state.appData);
+  const { offers, status } = useAppSelector((state) => state.appData);
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
   const { city } = useAppSelector((state) => state.offerReducer);
@@ -26,6 +27,10 @@ function Main(): JSX.Element {
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
   };
+
+  if (status === Status.Loading) {
+    return <Loader />;
+  }
 
   return (
     <Layout className="page--gray page--main">
