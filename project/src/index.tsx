@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { mockComments } from './mocks/comments';
-import { mockOffers } from './mocks/offer';
+import { fetchOffersAction } from './store/api-actions';
 import { store } from './store/store';
+
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App offers={mockOffers} comments={mockComments} />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

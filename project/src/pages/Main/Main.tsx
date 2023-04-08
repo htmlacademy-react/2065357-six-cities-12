@@ -6,17 +6,13 @@ import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
 import { OfferCardType } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { Offer } from '../../types/offer';
 import { getOffersByCity } from '../../utils/common';
 import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 
-type MainProps = {
-  offers: Offer[];
-}
-
-function Main({ offers }: MainProps): JSX.Element {
+function Main(): JSX.Element {
+  const { offers } = useAppSelector((state) => state.appData);
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
   const { city } = useAppSelector((state) => state.offerReducer);
