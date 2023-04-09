@@ -13,7 +13,7 @@ const initialState: InitialState = {
   status: null
 };
 
-const appData = createSlice({
+const offersData = createSlice({
   name: 'fetchOffers',
   initialState,
   reducers: {},
@@ -32,4 +32,4 @@ const appData = createSlice({
   }
 });
 
-export default appData.reducer;
+export default offersData.reducer;

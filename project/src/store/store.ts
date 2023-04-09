@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
-import offerReducer from './offer-slice/offer-slice';
-import appData from './app-data/app-data';
+import offerReducer from './app-slice/app-slice';
+import appData from './offers-data/offers-data';
 
 export const rootReducer = combineReducers({
   offerReducer,
