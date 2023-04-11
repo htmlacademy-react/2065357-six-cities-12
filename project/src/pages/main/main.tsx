@@ -14,11 +14,11 @@ import Loader from '../../components/loader/loader';
 import ErrorMessage from '../../components/error-message/error-message';
 
 function Main(): JSX.Element {
-  const { offers, status } = useAppSelector((state) => state.appData);
+  const { offers, status } = useAppSelector((state) => state.offersData);
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
-  const { city } = useAppSelector((state) => state.offerReducer);
-  const { sortType } = useAppSelector((state) => state.offerReducer);
+  const { city } = useAppSelector((state) => state.appReducer);
+  const { sortType } = useAppSelector((state) => state.appReducer);
 
   const offersByCity = getOffersByCity(city, offers);
   const sortedOffers = getSortedOffers(offersByCity, sortType);

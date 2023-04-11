@@ -14,7 +14,7 @@ const initialState: InitialState = {
 };
 
 const offersData = createSlice({
-  name: 'fetchOffers',
+  name: 'data/fetchOffers',
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -24,7 +24,7 @@ const offersData = createSlice({
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.status = null;
+        state.status = Status.Success;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.status = Status.Error;
