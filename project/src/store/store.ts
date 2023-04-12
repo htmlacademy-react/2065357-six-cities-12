@@ -1,11 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { redirect } from './middleware/redirect';
 import { createAPI } from '../services/api';
-import offerReducer from './offer-slice/offer-slice';
-import appData from './app-data/app-data';
+import appReducer from './app-slice/app-slice';
+import offersData from './offers-data/offers-data';
+import userReducer from './user-slice/user-slice';
 
 export const rootReducer = combineReducers({
-  offerReducer,
-  appData
+  appReducer,
+  offersData,
+  userReducer
 });
 
 export const api = createAPI();
@@ -17,5 +20,5 @@ export const store = configureStore({
       thunk: {
         extraArgument: api
       },
-    }),
+    }).concat(redirect),
 });

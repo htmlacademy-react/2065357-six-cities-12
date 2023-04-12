@@ -17,16 +17,12 @@ const initialState: InitialState = {
   sortType: DEFAULT_SORT_TYPE
 };
 
-export const OfferSlice = createSlice({
-  name: 'offer',
+export const AppSlice = createSlice({
+  name: 'appActions',
   initialState,
   reducers: {
     changeCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
-    },
-
-    loadOffers: (state, action: PayloadAction<Offer[]>) => {
-      state.offers = action.payload;
     },
 
     changeSortType: (state, action: PayloadAction<SortType>) => {
@@ -37,8 +33,7 @@ export const OfferSlice = createSlice({
 
 export const {
   changeCity,
-  loadOffers,
   changeSortType
-} = OfferSlice.actions;
+} = AppSlice.actions;
 
-export default OfferSlice.reducer;
+export default AppSlice.reducer;

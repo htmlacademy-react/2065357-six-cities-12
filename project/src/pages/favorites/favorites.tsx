@@ -22,7 +22,7 @@ const getOffersByCityGroup = (offers: Offer[]) =>
   }, {});
 
 function Favorites(): JSX.Element {
-  const { offers } = useAppSelector((state) => state.appData);
+  const { offers } = useAppSelector((state) => state.offersData);
   const offersByCity = getOffersByCityGroup(offers);
 
   return (

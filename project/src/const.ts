@@ -9,7 +9,8 @@ export enum APIRoute {
   Offers = '/hotels',
   Favorite = '/favorite',
   Comments = '/comments/:id',
-  User = '/login'
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export enum AuthorizationStatus {
@@ -32,7 +33,9 @@ export enum SortType {
 }
 
 export enum Status {
+  Idle = 'idle',
   Loading = 'loading',
+  Success = 'success',
   Error = 'error'
 }
 

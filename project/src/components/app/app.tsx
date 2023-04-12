@@ -1,18 +1,23 @@
 import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { Routes, Route } from 'react-router-dom';
+import browserHistory from '../../browser-history';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 // import OfferPage from '../../pages/offer/offer';
 import Page404 from '../../pages/page-404/page-404';
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 
 
 function App(): JSX.Element {
+  const { authorizationStatus } = useAppSelector((state) => state.userReducer);
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -22,7 +27,7 @@ function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               >
                 <Favorites />
               </PrivateRoute>
@@ -41,7 +46,7 @@ function App(): JSX.Element {
             element={<Login />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider >
   );
 }

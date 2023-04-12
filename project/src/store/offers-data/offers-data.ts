@@ -13,8 +13,8 @@ const initialState: InitialState = {
   status: null
 };
 
-const appData = createSlice({
-  name: 'fetchOffers',
+const offersData = createSlice({
+  name: 'data/fetchOffers',
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -24,7 +24,7 @@ const appData = createSlice({
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.status = null;
+        state.status = Status.Success;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.status = Status.Error;
@@ -32,4 +32,4 @@ const appData = createSlice({
   }
 });
 
-export default appData.reducer;
+export default offersData.reducer;
