@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Status } from '../../const';
+import { NameSpace, Status } from '../../const';
 import { Offer } from '../../types/offer';
 import { fetchOffersAction } from '../api-actions';
 
@@ -14,7 +14,7 @@ const initialState: InitialState = {
 };
 
 const offersData = createSlice({
-  name: 'data/fetchOffers',
+  name: NameSpace.Data,
   initialState,
   reducers: {},
   extraReducers(builder) {

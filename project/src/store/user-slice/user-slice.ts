@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, NameSpace } from '../../const';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 
 type InitialState = {
@@ -15,7 +15,7 @@ const initialState: InitialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {

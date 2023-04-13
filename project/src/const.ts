@@ -39,6 +39,12 @@ export enum Status {
   Error = 'error'
 }
 
+export enum NameSpace {
+  App = 'APP',
+  Data = 'DATA',
+  User = 'USER'
+}
+
 export const CITIES = [
   'Paris',
   'Cologne',
