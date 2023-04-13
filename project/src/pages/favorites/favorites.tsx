@@ -3,6 +3,7 @@ import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getOffers } from '../../store/offers-data/selectors';
 import { Offer } from '../../types/offer';
 
 type OffersByCityGroup = {
@@ -22,7 +23,7 @@ const getOffersByCityGroup = (offers: Offer[]) =>
   }, {});
 
 function Favorites(): JSX.Element {
-  const { offers } = useAppSelector((state) => state.offersData);
+  const offers = useAppSelector(getOffers);
   const offersByCity = getOffersByCityGroup(offers);
 
   return (

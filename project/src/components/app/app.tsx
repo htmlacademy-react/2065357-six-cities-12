@@ -8,12 +8,13 @@ import Login from '../../pages/login/login';
 import Main from '../../pages/main/main';
 // import OfferPage from '../../pages/offer/offer';
 import Page404 from '../../pages/page-404/page-404';
+import { getAuthorizationStatus } from '../../store/user-slice/selectors';
 import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 
 
 function App(): JSX.Element {
-  const { authorizationStatus } = useAppSelector((state) => state.userReducer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <HelmetProvider>

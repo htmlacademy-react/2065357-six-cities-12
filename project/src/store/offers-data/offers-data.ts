@@ -13,7 +13,7 @@ const initialState: InitialState = {
   status: null
 };
 
-const offersData = createSlice({
+export const offersData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {},
@@ -31,5 +31,3 @@ const offersData = createSlice({
       });
   }
 });
-
-export default offersData.reducer;

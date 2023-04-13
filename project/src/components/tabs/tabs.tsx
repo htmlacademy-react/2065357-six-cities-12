@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CITIES } from '../../const';
+import { Cities } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import cn from 'classnames';
 import { changeCity } from '../../store/app-slice/app-slice';
@@ -15,7 +15,7 @@ function Tabs({ currentCity }: TabsProps): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {CITIES.map((city) => (
+          {Object.values(Cities).map((city) => (
             <li
               className="locations__item"
               key={city}

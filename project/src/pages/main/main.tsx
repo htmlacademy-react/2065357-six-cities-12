@@ -12,13 +12,16 @@ import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
 import ErrorMessage from '../../components/error-message/error-message';
+import { getOffers, getStatus } from '../../store/offers-data/selectors';
+import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
 
 function Main(): JSX.Element {
-  const { offers, status } = useAppSelector((state) => state.offersData);
+  const offers = useAppSelector(getOffers);
+  const status = useAppSelector(getStatus);
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
 
-  const { city } = useAppSelector((state) => state.appReducer);
-  const { sortType } = useAppSelector((state) => state.appReducer);
+  const city = useAppSelector(getCurrentCity);
+  const sortType = useAppSelector(getCurrentSortType);
 
   const offersByCity = getOffersByCity(city, offers);
   const sortedOffers = getSortedOffers(offersByCity, sortType);

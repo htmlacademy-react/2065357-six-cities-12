@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Offer } from '../../types/offer';
-import { CITIES, NameSpace, SortType } from '../../const';
+import { Cities, NameSpace, SortType } from '../../const';
 
-const DEFAULT_CITY = CITIES[0];
+const DEFAULT_CITY = Cities.Paris;
 const DEFAULT_SORT_TYPE = SortType.Popular;
 
 type InitialState = {
-  city: string;
+  city: Cities;
   offers: Offer[];
   sortType: SortType;
 }
@@ -21,7 +21,7 @@ export const AppSlice = createSlice({
   name: NameSpace.App,
   initialState,
   reducers: {
-    changeCity: (state, action: PayloadAction<string>) => {
+    changeCity: (state, action: PayloadAction<Cities>) => {
       state.city = action.payload;
     },
 
@@ -35,5 +35,3 @@ export const {
   changeCity,
   changeSortType
 } = AppSlice.actions;
-
-export default AppSlice.reducer;

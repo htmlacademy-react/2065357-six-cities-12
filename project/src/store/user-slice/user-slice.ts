@@ -14,7 +14,7 @@ const initialState: InitialState = {
   avatarUrl: ''
 };
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {},
@@ -41,5 +41,3 @@ const userSlice = createSlice({
       });
   }
 });
-
-export default userSlice.reducer;
