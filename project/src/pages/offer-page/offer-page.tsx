@@ -14,10 +14,11 @@ import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
 import Loader from '../../components/loader/loader';
 import { useEffect } from 'react';
-import { fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
 import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
+import { getComments, getCommentsStatus } from '../../store/comments-data/selectors';
 
 function OfferPage(): JSX.Element {
   const offer = useAppSelector(getOffer);
@@ -26,15 +27,20 @@ function OfferPage(): JSX.Element {
   const nearOffers = useAppSelector(getNearOffers);
   const nearOffersStatus = useAppSelector(getNearOffersStatus);
 
+  const comments = useAppSelector(getComments);
+  const commentsStatus = useAppSelector(getCommentsStatus);
+
   const dispatch = useAppDispatch();
   const offerId = Number(useParams().id);
+  const isLoading = offerStatus.isLoading || nearOffersStatus.isLoading || commentsStatus.isLoading;
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
     dispatch(fetchNearOffersAction(offerId));
+    dispatch(fetchCommentsAction(offerId));
   }, [dispatch, offerId]);
 
-  if (!offer || offerStatus.isLoading || nearOffersStatus.isLoading) {
+  if (!offer || isLoading) {
     return <Loader isSmall={false} />;
   }
 
@@ -109,7 +115,7 @@ function OfferPage(): JSX.Element {
                 </div>
               </div>
 
-              <Comments comments={[]} />
+              <Comments comments={comments} />
 
             </div>
           </div>

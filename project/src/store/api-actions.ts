@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
+import { Comment } from '../types/comment';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
@@ -57,6 +58,24 @@ export const fetchNearOffersAction = createAsyncThunk<Offer[], number, {
       return data;
     } catch (err) {
       dispatch(pushNotification({ type: 'error', message: 'Failed to load near offers data' }));
+      throw err;
+    }
+  }
+);
+
+export const fetchCommentsAction = createAsyncThunk<Comment[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${offerId}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load comments' }));
       throw err;
     }
   }
