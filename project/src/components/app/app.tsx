@@ -12,7 +12,7 @@ import PrivateRoute from '../private-route/private-route';
 
 const FavoritesPage = lazy(() => import('../../pages/favorites-page/favorites-page'));
 const LoginPage = lazy(() => import('../../pages/login-page/login-page'));
-// const OfferPage = lazy(() => import('../../pages/offer-page/offer-page'));
+const OfferPage = lazy(() => import('../../pages/offer-page/offer-page'));
 const Page404 = lazy(() => import('../../pages/page-404/page-404'));
 
 function App(): JSX.Element {
@@ -37,10 +37,10 @@ function App(): JSX.Element {
                 </PrivateRoute>
               }
             />
-            {/* <Route
-            path={AppRoute.Offer}
-            element={<OfferPage offers={offersByCity} comments={comments} />}
-          /> */}
+            <Route
+              path={AppRoute.Offer}
+              element={<OfferPage />}
+            />
             <Route
               path='*'
               element={<Page404 />}

@@ -2,12 +2,14 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../const';
 import { AppSlice } from './app-slice/app-slice';
 import { notificationsSlice } from './notifications-slice/notifications-slice';
+import { offerData } from './offer-data/offer-data';
 import { offersData } from './offers-data/offers-data';
 import { userSlice } from './user-slice/user-slice';
 
 export const rootReducer = combineReducers({
   [NameSpace.App]: AppSlice.reducer,
   [NameSpace.Data]: offersData.reducer,
+  [NameSpace.Offer]: offerData.reducer,
   [NameSpace.User]: userSlice.reducer,
   [NameSpace.Notification]: notificationsSlice.reducer
 });

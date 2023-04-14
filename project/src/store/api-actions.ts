@@ -26,6 +26,24 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   }
 );
 
+export const fetchOfferAction = createAsyncThunk<Offer, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load offer data' }));
+      throw err;
+    }
+  }
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;

@@ -1,48 +1,37 @@
 import GoodsList from '../../components/goods-list/goods-list';
 import Layout from '../../components/layout/layout';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
-import { Offer } from '../../types/offer';
 import { ucFirst } from '../../utils/common';
 import { convertRatingToPercent } from '../../utils/offer';
 import Mark from '../../components/mark/mark';
 import FavoriteButton from '../../components/favorite-btn/favorite-btn';
 import Map from '../../components/map/map';
-import { Comment } from '../../types/comment';
 import Comments from '../../components/comments/comments';
 import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
-import { Navigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
+import Loader from '../../components/loader/loader';
+import { useEffect } from 'react';
+import { fetchOfferAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { useParams } from 'react-router-dom';
 
-const NEAR_OFFERS_COUNT = 3;
+function OfferPage(): JSX.Element {
+  const offer = useAppSelector(getOffer);
+  const status = useAppSelector(getOfferStatus);
 
-type OfferPageProps = {
-  offers: Offer[];
-  comments: Comment[];
-}
+  const dispatch = useAppDispatch();
+  const offerId = Number(useParams().id);
 
-function OfferPage({ offers, comments }: OfferPageProps): JSX.Element {
-  const { id } = useParams();
+  useEffect(() => {
+    dispatch(fetchOfferAction(offerId));
+  }, [dispatch, offerId]);
 
-  const offer = offers.find((offerItem) => offerItem.id === Number(id));
-
-  if (!offer) {
-    return (<Navigate to='*' />);
+  if (!offer || status.isLoading) {
+    return <Loader isSmall={false} />;
   }
-
-  const nearOffers = offers.reduce((acc: Offer[], offerItem) => {
-    if (acc?.length === NEAR_OFFERS_COUNT) {
-      return acc;
-    }
-
-    if (offerItem !== offer) {
-      acc?.push(offerItem);
-    }
-
-    return acc;
-  }, []);
-
-  const renderedOffers: Offer[] = [...nearOffers, offer];
 
   return (
     <Layout pageTitle={offer.title}>
@@ -113,18 +102,18 @@ function OfferPage({ offers, comments }: OfferPageProps): JSX.Element {
                 </div>
               </div>
 
-              <Comments comments={comments} />
+              <Comments comments={[]} />
 
             </div>
           </div>
-          <Map className="property" location={offers[0].city.location} offers={renderedOffers} selectedOfferId={offer.id} />
+          <Map className="property" location={offer.city.location} offers={[]} selectedOfferId={offer.id} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
               classNames="near-places__list places__list"
-              offers={nearOffers}
+              offers={[]}
               offerCardType={OfferCardType.Offer}
             />
           </section>
