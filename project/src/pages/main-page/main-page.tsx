@@ -11,13 +11,13 @@ import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
-import ErrorMessage from '../../components/error-message/error-message';
 import { getOffers, getOffersStatus } from '../../store/offers-data/selectors';
 import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
+import ErrorPage from '../error-page/error-page';
 
-function Main(): JSX.Element {
+function MainPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const status = useAppSelector(getOffersStatus);
   const city = useAppSelector(getCurrentCity);
@@ -44,7 +44,7 @@ function Main(): JSX.Element {
   }
 
   if (status.isError) {
-    return <ErrorMessage />;
+    return <ErrorPage />;
   }
 
   return (
@@ -89,4 +89,4 @@ function Main(): JSX.Element {
   );
 }
 
-export default Main;
+export default MainPage;

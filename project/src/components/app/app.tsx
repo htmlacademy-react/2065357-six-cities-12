@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import Favorites from '../../pages/favorites/favorites';
-import Login from '../../pages/login/login';
-import Main from '../../pages/main/main';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import LoginPage from '../../pages/login-page/login-page';
+import MainPage from '../../pages/main-page/main-page';
 // import OfferPage from '../../pages/offer/offer';
 import Page404 from '../../pages/page-404/page-404';
 import { getAuthorizationStatus } from '../../store/user-slice/selectors';
@@ -22,7 +22,7 @@ function App(): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<Main />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Favorites}
@@ -30,7 +30,7 @@ function App(): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
               >
-                <Favorites />
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
@@ -44,7 +44,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={<LoginPage />}
           />
         </Routes>
       </HistoryRouter>

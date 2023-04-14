@@ -22,7 +22,7 @@ const getOffersByCityGroup = (offers: Offer[]) =>
     return cityGroup;
   }, {});
 
-function Favorites(): JSX.Element {
+function FavoritesPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const offersByCity = getOffersByCityGroup(offers);
 
@@ -56,4 +56,4 @@ function Favorites(): JSX.Element {
   );
 }
 
-export default Favorites;
+export default FavoritesPage;

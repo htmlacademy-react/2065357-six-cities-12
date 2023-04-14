@@ -1,10 +1,8 @@
-// import { Link } from 'react-router-dom';
-// import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { fetchOffersAction } from '../../store/api-actions';
-import classes from './error-message.module.scss';
+import classes from './error-page.module.scss';
 
-function ErrorMessage(): JSX.Element {
+function ErrorPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
@@ -18,4 +16,4 @@ function ErrorMessage(): JSX.Element {
   );
 }
 
-export default ErrorMessage;
+export default ErrorPage;

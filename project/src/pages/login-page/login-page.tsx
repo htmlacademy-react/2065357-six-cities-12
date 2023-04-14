@@ -1,7 +1,7 @@
 import Layout from '../../components/layout/layout';
 import LoginForm from '../../components/login-form/login-form';
 
-function Login(): JSX.Element {
+function LoginPage(): JSX.Element {
   return (
     <Layout
       pageTitle="Login"
@@ -27,4 +27,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default LoginPage;
