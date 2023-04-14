@@ -42,7 +42,8 @@ export enum Status {
 export enum NameSpace {
   App = 'APP',
   Data = 'DATA',
-  User = 'USER'
+  User = 'USER',
+  Notification = 'NOTIFICATION'
 }
 
 export enum Cities {
