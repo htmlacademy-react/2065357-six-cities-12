@@ -3,10 +3,13 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getAvatarUrl, getLogin } from '../../store/user-slice/selectors';
 import classes from './user-profile.module.scss';
 
 function UserProfile(): JSX.Element {
-  const { login, avatarUrl, authorizationStatus } = useAppSelector((state) => state.userReducer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const login = useAppSelector(getLogin);
+  const avatarUrl = useAppSelector(getAvatarUrl);
   const isAuthorizated = authorizationStatus === AuthorizationStatus.Auth;
   const dispatch = useAppDispatch();
 

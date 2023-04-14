@@ -1,21 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, NameSpace, Status } from '../../const';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 
 type InitialState = {
   authorizationStatus: AuthorizationStatus;
   login: string;
   avatarUrl: string;
+  status: Status;
 };
 
 const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   login: '',
-  avatarUrl: ''
+  avatarUrl: '',
+  status: Status.Idle
 };
 
-const userSlice = createSlice({
-  name: 'user',
+export const userSlice = createSlice({
+  name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -28,18 +30,21 @@ const userSlice = createSlice({
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
+      .addCase(loginAction.pending, (state) => {
+        state.status = Status.Loading;
+      })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.login = action.payload.email;
         state.avatarUrl = action.payload.avatarUrl;
+        state.status = Status.Success;
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.status = Status.Error;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
   }
 });
-
-export default userSlice.reducer;

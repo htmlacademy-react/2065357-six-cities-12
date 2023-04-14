@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Status } from '../../const';
+import { NameSpace, Status } from '../../const';
 import { Offer } from '../../types/offer';
 import { fetchOffersAction } from '../api-actions';
 
 type InitialState = {
   offers: Offer[];
-  status: Status | null;
+  status: Status;
 };
 
 const initialState: InitialState = {
   offers: [],
-  status: null
+  status: Status.Idle
 };
 
-const offersData = createSlice({
-  name: 'data/fetchOffers',
+export const offersData = createSlice({
+  name: NameSpace.Data,
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -31,5 +31,3 @@ const offersData = createSlice({
       });
   }
 });
-
-export default offersData.reducer;

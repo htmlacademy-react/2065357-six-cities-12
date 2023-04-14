@@ -39,11 +39,18 @@ export enum Status {
   Error = 'error'
 }
 
-export const CITIES = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf'
-];
+export enum NameSpace {
+  App = 'APP',
+  Data = 'DATA',
+  User = 'USER',
+  Notification = 'NOTIFICATION'
+}
+
+export enum Cities {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}

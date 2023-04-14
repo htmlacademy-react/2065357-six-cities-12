@@ -1,9 +1,14 @@
+import cn from 'classnames';
 import classes from './loader.module.scss';
 
-function Loader(): JSX.Element {
+type LoaderProps = {
+  isSmall?: boolean;
+};
+
+function Loader({ isSmall = true }: LoaderProps): JSX.Element {
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.loader}></div>
+    <div className={cn(!isSmall && classes.wrapper)}>
+      <div className={cn(classes.loader, isSmall && classes.small)}></div>
     </div>
   );
 }

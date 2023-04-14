@@ -19,9 +19,13 @@
 
 .btn {
   font-size: 36px;
-  text-decoration: underline;
+  color: #65abf8;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity .3s ease-in-out;
 
   &:hover {
-    opacity: .8;
+    opacity: .6;
   }
 }

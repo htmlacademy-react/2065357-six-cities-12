@@ -16,12 +16,12 @@ import cn from 'classnames';
 
 const NEAR_OFFERS_COUNT = 3;
 
-type OfferProps = {
+type OfferPageProps = {
   offers: Offer[];
   comments: Comment[];
 }
 
-function OfferPage({ offers, comments }: OfferProps): JSX.Element {
+function OfferPage({ offers, comments }: OfferPageProps): JSX.Element {
   const { id } = useParams();
 
   const offer = offers.find((offerItem) => offerItem.id === Number(id));
