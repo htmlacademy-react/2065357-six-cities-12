@@ -14,24 +14,31 @@ import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
 import Loader from '../../components/loader/loader';
 import { useEffect } from 'react';
-import { fetchOfferAction } from '../../store/api-actions';
+import { fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
+import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
 
 function OfferPage(): JSX.Element {
   const offer = useAppSelector(getOffer);
-  const status = useAppSelector(getOfferStatus);
+  const offerStatus = useAppSelector(getOfferStatus);
+
+  const nearOffers = useAppSelector(getNearOffers);
+  const nearOffersStatus = useAppSelector(getNearOffersStatus);
 
   const dispatch = useAppDispatch();
   const offerId = Number(useParams().id);
 
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
+    dispatch(fetchNearOffersAction(offerId));
   }, [dispatch, offerId]);
 
-  if (!offer || status.isLoading) {
+  if (!offer || offerStatus.isLoading || nearOffersStatus.isLoading) {
     return <Loader isSmall={false} />;
   }
+
+  const renderedOffers = [...nearOffers, offer];
 
   return (
     <Layout pageTitle={offer.title}>
@@ -106,14 +113,14 @@ function OfferPage(): JSX.Element {
 
             </div>
           </div>
-          <Map className="property" location={offer.city.location} offers={[]} selectedOfferId={offer.id} />
+          <Map className="property" location={offer.city.location} offers={renderedOffers} selectedOfferId={offer.id} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
               classNames="near-places__list places__list"
-              offers={[]}
+              offers={nearOffers}
               offerCardType={OfferCardType.Offer}
             />
           </section>

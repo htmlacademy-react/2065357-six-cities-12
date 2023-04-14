@@ -44,6 +44,24 @@ export const fetchOfferAction = createAsyncThunk<Offer, number, {
   }
 );
 
+export const fetchNearOffersAction = createAsyncThunk<Offer[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffers',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load near offers data' }));
+      throw err;
+    }
+  }
+);
+
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
   state: State;

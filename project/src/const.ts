@@ -43,6 +43,7 @@ export enum NameSpace {
   App = 'APP',
   Data = 'DATA',
   Offer = 'OFFER',
+  NearOffers = 'NEAR-OFFERS',
   User = 'USER',
   Notification = 'NOTIFICATION'
 }
