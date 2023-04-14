@@ -7,15 +7,22 @@ import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
+import { pushNotification } from './notifications-slice/notifications-slice';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
+  dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffers',
-  async (_arg, { extra: api }) => {
-    const { data } = await api.get<Offer[]>(APIRoute.Offers);
-    return data;
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer[]>(APIRoute.Offers);
+
+      return data;
+    } catch {
+      throw new Error();
+    }
   }
 );
 
@@ -39,10 +46,17 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
 }>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(data.token);
-    dispatch(redirectToRoute(AppRoute.Main));
-    return data;
+    try {
+      const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+      saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Main));
+      dispatch(pushNotification({ type: 'success', message: 'Login success' }));
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Login failed' }));
+      throw err;
+    }
   },
 );
 
@@ -53,7 +67,12 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 }>(
   'user/logout',
   async (_arg, { dispatch, extra: api }) => {
-    await api.delete(APIRoute.Logout);
-    dropToken();
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Logout failed' }));
+      throw err;
+    }
   },
 );
