@@ -40,7 +40,7 @@ function MainPage(): JSX.Element {
   };
 
   if (status.isLoading) {
-    return <Loader />;
+    return <Loader isSmall={false} />;
   }
 
   if (status.isError) {

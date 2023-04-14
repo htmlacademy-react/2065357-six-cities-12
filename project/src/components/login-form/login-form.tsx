@@ -3,6 +3,9 @@ import classes from './login-form.module.scss';
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { loginAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getLoginStatus } from '../../store/user-slice/selectors';
+import Loader from '../loader/loader';
 
 const EMAIL_PATTERN = /^[_a-z0-9-+-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i;
 const PASSWORD_PATTERN = /(?=.*[a-z])(?=.*[0-9])/g;
@@ -20,6 +23,7 @@ type Field = {
 };
 
 function LoginForm(): JSX.Element {
+  const status = useAppSelector(getLoginStatus);
   const [formData, setFormData] = useState<Record<string, Field>>({
     email: {
       value: '',
@@ -88,7 +92,7 @@ function LoginForm(): JSX.Element {
         type="submit"
         disabled={!isValid}
       >
-        Sign in
+        {status.isLoading ? <Loader /> : 'Sign in'}
       </button>
     </form>
   );
