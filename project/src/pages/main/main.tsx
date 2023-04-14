@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/layout';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
-import { OfferCardType, Status } from '../../const';
+import { OfferCardType } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { getOffersByCity } from '../../utils/common';
 import { getSortedOffers } from '../../utils/sort';
@@ -12,31 +12,38 @@ import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
 import ErrorMessage from '../../components/error-message/error-message';
-import { getOffers, getStatus } from '../../store/offers-data/selectors';
+import { getOffers, getOffersStatus } from '../../store/offers-data/selectors';
 import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
 
 function Main(): JSX.Element {
   const offers = useAppSelector(getOffers);
-  const status = useAppSelector(getStatus);
-  const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
-
+  const status = useAppSelector(getOffersStatus);
   const city = useAppSelector(getCurrentCity);
   const sortType = useAppSelector(getCurrentSortType);
-
   const offersByCity = getOffersByCity(city, offers);
   const sortedOffers = getSortedOffers(offersByCity, sortType);
 
   const isEmpty = !offersByCity.length;
 
+  const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
   };
 
-  if (status === Status.Loading) {
+  if (status.isLoading) {
     return <Loader />;
   }
 
-  if (status === Status.Error) {
+  if (status.isError) {
     return <ErrorMessage />;
   }
 

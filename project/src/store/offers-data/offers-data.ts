@@ -5,12 +5,12 @@ import { fetchOffersAction } from '../api-actions';
 
 type InitialState = {
   offers: Offer[];
-  status: Status | null;
+  status: Status;
 };
 
 const initialState: InitialState = {
   offers: [],
-  status: null
+  status: Status.Idle
 };
 
 export const offersData = createSlice({
