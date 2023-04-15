@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { sendCommentAction } from '../../store/api-actions';
-import { getPostCommentStatus } from '../../store/comments-data/selectors';
+import { getPostCommentStatus } from '../../store/comments-slice/selectors';
 import Loader from '../loader/loader';
 
 const RATING_TITLES = [
