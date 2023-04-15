@@ -54,7 +54,7 @@ function App(): JSX.Element {
             />
             <Route
               path={AppRoute.Login}
-              element={<LoginPage />}
+              element={<LoginPage authorizationStatus={authorizationStatus} />}
             />
           </Routes>
         </HistoryRouter>

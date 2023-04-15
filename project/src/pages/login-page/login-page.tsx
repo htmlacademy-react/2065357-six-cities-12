@@ -1,7 +1,19 @@
+import { Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/layout';
 import LoginForm from '../../components/login-form/login-form';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
-function LoginPage(): JSX.Element {
+type LoginPageProps = {
+  authorizationStatus: AuthorizationStatus;
+}
+
+function LoginPage({ authorizationStatus }: LoginPageProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return (
+      <Navigate to={AppRoute.Main} />
+    );
+  }
+
   return (
     <Layout
       pageTitle="Login"
