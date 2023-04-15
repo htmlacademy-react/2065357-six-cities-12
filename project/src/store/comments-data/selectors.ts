@@ -13,4 +13,6 @@ export const getCommentsFetchStatus = createSelector([getFetchStatus], (status) 
 
 export const getPostCommentStatus = createSelector([getPostStatus], (status) => ({
   isLoading: status === Status.Loading,
+  isSuccess: status === Status.Success,
+  isError: status === Status.Error
 }));

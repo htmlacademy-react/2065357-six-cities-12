@@ -19,6 +19,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
 import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
 import { getComments, getCommentsFetchStatus } from '../../store/comments-data/selectors';
+import { getSortedComments } from '../../utils/comment';
 
 function OfferPage(): JSX.Element {
   const offer = useAppSelector(getOffer);
@@ -28,6 +29,7 @@ function OfferPage(): JSX.Element {
   const nearOffersStatus = useAppSelector(getNearOffersStatus);
 
   const comments = useAppSelector(getComments);
+  const sortedComments = getSortedComments(comments);
   const commentsFetchStatus = useAppSelector(getCommentsFetchStatus);
 
   const dispatch = useAppDispatch();
@@ -115,7 +117,7 @@ function OfferPage(): JSX.Element {
                 </div>
               </div>
 
-              <Comments comments={comments} />
+              <Comments comments={sortedComments} />
 
             </div>
           </div>

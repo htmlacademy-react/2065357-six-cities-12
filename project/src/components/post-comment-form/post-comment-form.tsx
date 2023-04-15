@@ -1,4 +1,4 @@
-import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
@@ -15,7 +15,7 @@ const RATING_TITLES = [
 ];
 
 const MIN_AMOUNT_SYMBOLS = 50;
-const MAX_AMOUNT_SYMBOLS = 500;
+const MAX_AMOUNT_SYMBOLS = 300;
 
 function PostCommentForm(): JSX.Element {
   const [formData, setFormData] = useState({
@@ -26,7 +26,13 @@ function PostCommentForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = Number(useParams().id);
 
-  const isValid = MIN_AMOUNT_SYMBOLS < formData.review.length && formData.review.length < MAX_AMOUNT_SYMBOLS && +formData.rating;
+  const isDisabledButton = MIN_AMOUNT_SYMBOLS < formData.review.length || formData.review.length < MAX_AMOUNT_SYMBOLS || !+formData.rating || postCommentStatus.isLoading;
+
+  useEffect(() => {
+    if (postCommentStatus.isSuccess) {
+      setFormData({ ...formData, rating: '0', review: '' });
+    }
+  }, [postCommentStatus]);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = evt.target;
@@ -42,8 +48,6 @@ function PostCommentForm(): JSX.Element {
       comment: formData.review,
       rating: +formData.rating
     }));
-
-    setFormData({ ...formData, rating: '0', review: '' });
   };
 
   return (
@@ -68,6 +72,7 @@ function PostCommentForm(): JSX.Element {
                 type="radio"
                 checked={+formData.rating === reversedIndex}
                 onChange={handleChange}
+                disabled={postCommentStatus.isLoading}
               />
               <label
                 htmlFor={`${reversedIndex}-stars`}
@@ -88,6 +93,7 @@ function PostCommentForm(): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review}
         onChange={handleChange}
+        disabled={postCommentStatus.isLoading}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -100,7 +106,7 @@ function PostCommentForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid}
+          disabled={isDisabledButton}
         >
           {postCommentStatus.isLoading ? <Loader /> : 'Submit'}
         </button>
