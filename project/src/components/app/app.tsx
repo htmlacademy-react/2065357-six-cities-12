@@ -1,10 +1,12 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import MainPage from '../../pages/main-page/main-page';
+import { checkAuthAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-slice/selectors';
 import HistoryRouter from '../history-router/history-router';
 import Loader from '../loader/loader';
@@ -17,6 +19,11 @@ const Page404 = lazy(() => import('../../pages/page-404/page-404'));
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuthAction());
+  }, [dispatch]);
 
   return (
     <Suspense fallback={<Loader isSmall={false} />}>

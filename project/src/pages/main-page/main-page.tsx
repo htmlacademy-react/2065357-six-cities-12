@@ -14,7 +14,7 @@ import Loader from '../../components/loader/loader';
 import { getOffers, getOffersStatus } from '../../store/offers-data/selectors';
 import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { checkAuthAction, fetchOffersAction } from '../../store/api-actions';
+import { fetchOffersAction } from '../../store/api-actions';
 import ErrorPage from '../error-page/error-page';
 
 function MainPage(): JSX.Element {
@@ -32,7 +32,6 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-    dispatch(checkAuthAction());
   }, [dispatch]);
 
   const onCardHover = (offerId: number | null): void => {
