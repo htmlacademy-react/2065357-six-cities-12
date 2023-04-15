@@ -10,3 +10,7 @@ export const getStatus = (state: State): Status => state[NameSpace.User].status;
 export const getLoginStatus = createSelector([getStatus], (status) => ({
   isLoading: status === Status.Loading
 }));
+
+export const getAuthStatus = createSelector([getAuthorizationStatus], (status) => ({
+  isAuthorizated: status === AuthorizationStatus.Auth,
+}));

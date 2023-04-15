@@ -4,10 +4,13 @@ import { Comment } from '../../types/comment';
 import { State } from '../../types/state';
 
 export const getComments = (state: State): Comment[] => state[NameSpace.Comments].comments;
-export const getStatus = (state: State): Status => state[NameSpace.Comments].status;
+export const getFetchStatus = (state: State): Status => state[NameSpace.Comments].fetchStatus;
+export const getPostStatus = (state: State): Status => state[NameSpace.Comments].postStatus;
 
-export const getCommentsStatus = createSelector([getStatus], (status) => ({
+export const getCommentsFetchStatus = createSelector([getFetchStatus], (status) => ({
   isLoading: [Status.Idle, Status.Loading].includes(status),
-  isSuccess: status === Status.Success,
-  isError: status === Status.Error
+}));
+
+export const getPostCommentStatus = createSelector([getPostStatus], (status) => ({
+  isLoading: status === Status.Loading,
 }));

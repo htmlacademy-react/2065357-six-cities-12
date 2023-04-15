@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../const';
 import { Comment } from '../../types/comment';
-import { fetchCommentsAction } from '../api-actions';
+import { fetchCommentsAction, sendCommentAction } from '../api-actions';
 
 type InitialState = {
   comments: Comment[];
-  status: Status;
+  fetchStatus: Status;
+  postStatus: Status;
 };
 
 const initialState: InitialState = {
   comments: [],
-  status: Status.Idle
+  fetchStatus: Status.Idle,
+  postStatus: Status.Idle
 };
 
 export const commentsData = createSlice({
@@ -20,14 +22,24 @@ export const commentsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchCommentsAction.pending, (state) => {
-        state.status = Status.Loading;
+        state.fetchStatus = Status.Loading;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
-        state.status = Status.Success;
+        state.fetchStatus = Status.Success;
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
-        state.status = Status.Error;
+        state.fetchStatus = Status.Error;
+      })
+      .addCase(sendCommentAction.pending, (state) => {
+        state.postStatus = Status.Loading;
+      })
+      .addCase(sendCommentAction.fulfilled, (state, action) => {
+        state.comments = action.payload;
+        state.postStatus = Status.Success;
+      })
+      .addCase(sendCommentAction.rejected, (state) => {
+        state.postStatus = Status.Error;
       });
   }
 });

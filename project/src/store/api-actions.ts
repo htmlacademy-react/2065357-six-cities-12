@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { Comment } from '../types/comment';
+import { Comment, CommentData } from '../types/comment';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
@@ -76,6 +76,24 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], number, {
       return data;
     } catch (err) {
       dispatch(pushNotification({ type: 'error', message: 'Failed to load comments' }));
+      throw err;
+    }
+  }
+);
+
+export const sendCommentAction = createAsyncThunk<Comment[], CommentData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendComment',
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<Comment[]>(`${APIRoute.Comments}/${id}`, { comment, rating });
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to post comment' }));
       throw err;
     }
   }
