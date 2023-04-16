@@ -7,3 +7,9 @@ export type Comment = {
   rating: number;
   user: User;
 };
+
+export type CommentData = {
+  comment: string;
+  rating: number;
+  id: number;
+}

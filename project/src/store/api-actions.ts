@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
+import { Comment, CommentData } from '../types/comment';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 import { UserData } from '../types/user-data';
@@ -22,6 +23,78 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
       return data;
     } catch {
       throw new Error();
+    }
+  }
+);
+
+export const fetchOfferAction = createAsyncThunk<Offer, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load offer data' }));
+      throw err;
+    }
+  }
+);
+
+export const fetchNearOffersAction = createAsyncThunk<Offer[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffers',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load near offers data' }));
+      throw err;
+    }
+  }
+);
+
+export const fetchCommentsAction = createAsyncThunk<Comment[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (offerId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${offerId}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load comments' }));
+      throw err;
+    }
+  }
+);
+
+export const sendCommentAction = createAsyncThunk<Comment[], CommentData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendComment',
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<Comment[]>(`${APIRoute.Comments}/${id}`, { comment, rating });
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to post comment' }));
+      throw err;
     }
   }
 );

@@ -1,48 +1,52 @@
 import GoodsList from '../../components/goods-list/goods-list';
 import Layout from '../../components/layout/layout';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
-import { Offer } from '../../types/offer';
 import { ucFirst } from '../../utils/common';
 import { convertRatingToPercent } from '../../utils/offer';
 import Mark from '../../components/mark/mark';
 import FavoriteButton from '../../components/favorite-btn/favorite-btn';
 import Map from '../../components/map/map';
-import { Comment } from '../../types/comment';
 import Comments from '../../components/comments/comments';
 import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
-import { Navigate, useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
+import Loader from '../../components/loader/loader';
+import { useEffect } from 'react';
+import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
+import { useParams } from 'react-router-dom';
+import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
+import { getComments, getCommentsFetchStatus } from '../../store/comments-slice/selectors';
+import { getSortedComments } from '../../utils/comment';
 
-const NEAR_OFFERS_COUNT = 3;
+function OfferPage(): JSX.Element {
+  const offer = useAppSelector(getOffer);
+  const offerStatus = useAppSelector(getOfferStatus);
 
-type OfferPageProps = {
-  offers: Offer[];
-  comments: Comment[];
-}
+  const nearOffers = useAppSelector(getNearOffers);
+  const nearOffersStatus = useAppSelector(getNearOffersStatus);
 
-function OfferPage({ offers, comments }: OfferPageProps): JSX.Element {
-  const { id } = useParams();
+  const comments = useAppSelector(getComments);
+  const sortedComments = getSortedComments(comments);
+  const commentsFetchStatus = useAppSelector(getCommentsFetchStatus);
 
-  const offer = offers.find((offerItem) => offerItem.id === Number(id));
+  const dispatch = useAppDispatch();
+  const offerId = Number(useParams().id);
+  const isLoading = offerStatus.isLoading || nearOffersStatus.isLoading || commentsFetchStatus.isLoading;
 
-  if (!offer) {
-    return (<Navigate to='*' />);
+  useEffect(() => {
+    dispatch(fetchOfferAction(offerId));
+    dispatch(fetchNearOffersAction(offerId));
+    dispatch(fetchCommentsAction(offerId));
+  }, [dispatch, offerId]);
+
+  if (!offer || isLoading) {
+    return <Loader isSmall={false} />;
   }
 
-  const nearOffers = offers.reduce((acc: Offer[], offerItem) => {
-    if (acc?.length === NEAR_OFFERS_COUNT) {
-      return acc;
-    }
-
-    if (offerItem !== offer) {
-      acc?.push(offerItem);
-    }
-
-    return acc;
-  }, []);
-
-  const renderedOffers: Offer[] = [...nearOffers, offer];
+  const renderedOffers = [...nearOffers, offer];
 
   return (
     <Layout pageTitle={offer.title}>
@@ -113,11 +117,11 @@ function OfferPage({ offers, comments }: OfferPageProps): JSX.Element {
                 </div>
               </div>
 
-              <Comments comments={comments} />
+              <Comments comments={sortedComments} />
 
             </div>
           </div>
-          <Map className="property" location={offers[0].city.location} offers={renderedOffers} selectedOfferId={offer.id} />
+          <Map className="property" location={offer.city.location} offers={renderedOffers} selectedOfferId={offer.id} />
         </section>
         <div className="container">
           <section className="near-places places">

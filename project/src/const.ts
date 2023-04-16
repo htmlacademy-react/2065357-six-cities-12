@@ -8,7 +8,7 @@ export enum AppRoute {
 export enum APIRoute {
   Offers = '/hotels',
   Favorite = '/favorite',
-  Comments = '/comments/:id',
+  Comments = '/comments',
   Login = '/login',
   Logout = '/logout'
 }
@@ -42,6 +42,9 @@ export enum Status {
 export enum NameSpace {
   App = 'APP',
   Data = 'DATA',
+  Offer = 'OFFER',
+  NearOffers = 'NEAR-OFFERS',
+  Comments = 'COMMENTS',
   User = 'USER',
   Notification = 'NOTIFICATION'
 }
