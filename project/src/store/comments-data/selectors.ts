@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../const';
 import { Comment } from '../../types/comment';
-import { State } from '../../types/state';
+import { State } from '../../types/store';
 
 export const getComments = (state: State): Comment[] => state[NameSpace.Comments].comments;
 export const getFetchStatus = (state: State): Status => state[NameSpace.Comments].fetchStatus;
