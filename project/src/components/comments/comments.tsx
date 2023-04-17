@@ -3,7 +3,7 @@ import { getAuthStatus } from '../../store/user-slice/selectors';
 import { Comment } from '../../types/comment';
 import { getRenderedComments } from '../../utils/comment';
 import CommentsList from '../comments-list/comments-list';
-import PostCommentForm from '../post-comment-form/post-comment-form';
+import CommentForm from '../comment-form/comment-form';
 
 const MAX_COMMENTS_COUNT = 10;
 
@@ -19,7 +19,7 @@ function Comments({ comments }: CommentsProp): JSX.Element {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{renderedComments.length}</span></h2>
       <CommentsList comments={renderedComments} />
-      {authorizationStatus.isAuthorizated && <PostCommentForm />}
+      {authorizationStatus.isAuthorizated && <CommentForm />}
     </section>
   );
 }

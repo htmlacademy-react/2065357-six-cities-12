@@ -17,7 +17,7 @@ const RATING_TITLES = [
 const MIN_AMOUNT_SYMBOLS = 50;
 const MAX_AMOUNT_SYMBOLS = 300;
 
-function PostCommentForm(): JSX.Element {
+function CommentForm(): JSX.Element {
   const [formData, setFormData] = useState({
     rating: '0',
     review: ''
@@ -30,7 +30,7 @@ function PostCommentForm(): JSX.Element {
 
   useEffect(() => {
     if (postCommentStatus.isSuccess) {
-      setFormData({ ...formData, rating: '0', review: '' });
+      setFormData((prev) => ({ ...prev, rating: '0', review: '' }));
     }
   }, [postCommentStatus]);
 
@@ -115,4 +115,4 @@ function PostCommentForm(): JSX.Element {
   );
 }
 
-export default PostCommentForm;
+export default CommentForm;
