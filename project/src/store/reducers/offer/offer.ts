@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../../const';
 import { Offer } from '../../../types/offer';
-import { fetchOfferAction, toggleFavoriteAction } from '../../api-actions';
+import { fetchOfferAction, logoutAction, toggleFavoriteAction } from '../../api-actions';
 
 type InitialState = {
   offer: Offer | null;
@@ -32,6 +32,11 @@ export const offerData = createSlice({
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
         if (state.offer?.id === action.payload.id) {
           state.offer.isFavorite = action.payload.isFavorite;
+        }
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        if (state.offer) {
+          state.offer.isFavorite = false;
         }
       });
   }
