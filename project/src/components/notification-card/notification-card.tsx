@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { clearNotification } from '../../store/notifications-slice/notifications-slice';
-import { getNotifications } from '../../store/notifications-slice/selectors';
+import { clearNotification } from '../../store/reducers/notifications/notifications';
+import { getNotifications } from '../../store/reducers/notifications/selectors';
 import { Notification } from '../../types/notification';
 
 function NotificationCard(): JSX.Element {

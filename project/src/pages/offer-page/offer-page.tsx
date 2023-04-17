@@ -11,14 +11,14 @@ import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
+import { getOffer, getOfferStatus } from '../../store/reducers/offer/selectors';
 import Loader from '../../components/loader/loader';
 import { useEffect } from 'react';
 import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
-import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
-import { getComments, getCommentsFetchStatus } from '../../store/comments-slice/selectors';
+import { getNearOffers, getNearOffersStatus } from '../../store/reducers/near-offers/selectors';
+import { getComments, getCommentsFetchStatus } from '../../store/reducers/comments/selectors';
 import { getSortedComments } from '../../utils/comment';
 
 function OfferPage(): JSX.Element {

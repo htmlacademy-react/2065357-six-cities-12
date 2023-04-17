@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { toggleFavoriteAction } from '../../store/api-actions';
-import { getAuthStatus } from '../../store/user-slice/selectors';
+import { getAuthStatus } from '../../store/reducers/user/selectors';
 
 type FavoriteButtonProps = {
   className: 'property' | 'place-card';

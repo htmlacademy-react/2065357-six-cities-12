@@ -7,7 +7,7 @@ import { FavoriteOfferData, Offer } from '../types/offer';
 import { ThunkOptions } from '../types/store';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
-import { pushNotification } from './notifications-slice/notifications-slice';
+import { pushNotification } from './reducers/notifications/notifications';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ThunkOptions>(
   'data/fetchOffers',

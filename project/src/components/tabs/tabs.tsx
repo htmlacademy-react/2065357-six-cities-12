@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Cities } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import cn from 'classnames';
-import { changeCity } from '../../store/app-slice/app-slice';
+import { changeCity } from '../../store/reducers/app/app';
 
 type TabsProps = {
   currentCity?: string;

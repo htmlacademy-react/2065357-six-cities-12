@@ -1,13 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../const';
-import { AppSlice } from './app-slice/app-slice';
-import { commentsData } from './comments-slice/comments-slice';
-import { favoritesSlice } from './favorites-slice/favorites-slice';
-import { nearOffersData } from './near-offers-data/near-offers-data';
-import { notificationsSlice } from './notifications-slice/notifications-slice';
-import { offerData } from './offer-data/offer-data';
-import { offersData } from './offers-data/offers-data';
-import { userSlice } from './user-slice/user-slice';
+import { AppSlice } from './reducers/app/app';
+import { commentsData } from './reducers/comments/comments';
+import { favoritesSlice } from './reducers/favorites/favorites';
+import { nearOffersData } from './reducers/near-offers/near-offers';
+import { notificationsSlice } from './reducers/notifications/notifications';
+import { offerData } from './reducers/offer/offer';
+import { offersData } from './reducers/offers/offers';
+import { userSlice } from './reducers/user/user';
 
 export const rootReducer = combineReducers({
   [NameSpace.App]: AppSlice.reducer,

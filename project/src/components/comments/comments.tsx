@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getAuthStatus } from '../../store/user-slice/selectors';
+import { getAuthStatus } from '../../store/reducers/user/selectors';
 import { Comment } from '../../types/comment';
 import { getRenderedComments } from '../../utils/comment';
 import CommentsList from '../comments-list/comments-list';

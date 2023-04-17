@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { SortType } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useOnClickOutside } from '../../hooks/use-on-click-outside/use-on-click-outside';
-import { changeSortType } from '../../store/app-slice/app-slice';
+import { changeSortType } from '../../store/reducers/app/app';
 
 type SortProps = {
   currentSortType: SortType;

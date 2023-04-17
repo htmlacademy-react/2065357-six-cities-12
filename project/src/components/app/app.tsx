@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import MainPage from '../../pages/main-page/main-page';
 import { checkAuthAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-slice/selectors';
+import { getAuthorizationStatus } from '../../store/reducers/user/selectors';
 import HistoryRouter from '../history-router/history-router';
 import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';

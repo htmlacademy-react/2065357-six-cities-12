@@ -3,8 +3,8 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { logoutAction } from '../../store/api-actions';
-import { getFavorites } from '../../store/favorites-slice/selectors';
-import { getAuthorizationStatus, getAvatarUrl, getLogin } from '../../store/user-slice/selectors';
+import { getFavorites } from '../../store/reducers/favorites/selectors';
+import { getAuthorizationStatus, getAvatarUrl, getLogin } from '../../store/reducers/user/selectors';
 import classes from './user-profile.module.scss';
 
 function UserProfile(): JSX.Element {

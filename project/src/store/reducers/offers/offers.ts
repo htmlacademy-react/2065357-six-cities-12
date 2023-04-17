@@ -1,36 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, Status } from '../../const';
-import { Offer } from '../../types/offer';
-import { fetchNearOffersAction, toggleFavoriteAction } from '../api-actions';
+import { NameSpace, Status } from '../../../const';
+import { Offer } from '../../../types/offer';
+import { fetchOffersAction, toggleFavoriteAction } from '../../api-actions';
 
 type InitialState = {
-  nearOffers: Offer[];
+  offers: Offer[];
   status: Status;
 };
 
 const initialState: InitialState = {
-  nearOffers: [],
+  offers: [],
   status: Status.Idle
 };
 
-export const nearOffersData = createSlice({
-  name: NameSpace.NearOffers,
+export const offersData = createSlice({
+  name: NameSpace.Data,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchNearOffersAction.pending, (state) => {
+      .addCase(fetchOffersAction.pending, (state) => {
         state.status = Status.Loading;
       })
-      .addCase(fetchNearOffersAction.fulfilled, (state, action) => {
-        state.nearOffers = action.payload;
+      .addCase(fetchOffersAction.fulfilled, (state, action) => {
+        state.offers = action.payload;
         state.status = Status.Success;
       })
-      .addCase(fetchNearOffersAction.rejected, (state) => {
+      .addCase(fetchOffersAction.rejected, (state) => {
         state.status = Status.Error;
       })
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
-        state.nearOffers.forEach((offer) => {
+        state.offers.forEach((offer) => {
           if (offer.id === action.payload.id) {
             offer.isFavorite = action.payload.isFavorite;
           }

@@ -11,12 +11,12 @@ import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
-import { getOffers, getOffersStatus } from '../../store/offers-data/selectors';
-import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
+import { getOffers, getOffersStatus } from '../../store/reducers/offers/selectors';
+import { getCurrentCity, getCurrentSortType } from '../../store/reducers/app/selectors';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { fetchFavoritesAction, fetchOffersAction } from '../../store/api-actions';
 import ErrorPage from '../error-page/error-page';
-import { getAuthStatus } from '../../store/user-slice/selectors';
+import { getAuthStatus } from '../../store/reducers/user/selectors';
 
 function MainPage(): JSX.Element {
   const offers = useAppSelector(getOffers);

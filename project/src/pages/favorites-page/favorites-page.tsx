@@ -7,7 +7,7 @@ import { OfferCardType } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { fetchFavoritesAction } from '../../store/api-actions';
-import { getFavorites } from '../../store/favorites-slice/selectors';
+import { getFavorites } from '../../store/reducers/favorites/selectors';
 import { Offer } from '../../types/offer';
 
 type OffersByCityGroup = {

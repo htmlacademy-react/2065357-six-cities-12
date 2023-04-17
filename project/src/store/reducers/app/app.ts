@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Offer } from '../../types/offer';
-import { Cities, NameSpace, SortType } from '../../const';
+import { Offer } from '../../../types/offer';
+import { Cities, NameSpace, SortType } from '../../../const';
 
 const DEFAULT_CITY = Cities.Paris;
 const DEFAULT_SORT_TYPE = SortType.Popular;
