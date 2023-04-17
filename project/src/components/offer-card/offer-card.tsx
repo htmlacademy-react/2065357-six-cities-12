@@ -56,7 +56,7 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <FavoriteButton className="place-card" isFavorite={offer.isFavorite} />
+          <FavoriteButton className="place-card" id={offer.id} isFavorite={offer.isFavorite} />
 
         </div>
         <div className="place-card__rating rating">

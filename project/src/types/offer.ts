@@ -29,3 +29,8 @@ export type Offer = {
   title: string;
   type: string;
 };
+
+export type FavoriteOfferData = {
+  id: number;
+  isFavorite: boolean;
+}

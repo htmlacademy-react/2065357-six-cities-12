@@ -3,7 +3,7 @@ import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { Comment, CommentData } from '../types/comment';
-import { Offer } from '../types/offer';
+import { FavoriteOfferData, Offer } from '../types/offer';
 import { ThunkOptions } from '../types/store';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
@@ -59,6 +59,20 @@ export const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, ThunkOp
       return data;
     } catch (err) {
       dispatch(pushNotification({ type: 'error', message: 'Failed to load favorites offers' }));
+      throw err;
+    }
+  }
+);
+
+export const toggleFavoriteAction = createAsyncThunk<Offer, FavoriteOfferData, ThunkOptions>(
+  'data/toggleFavorite',
+  async ({ id, isFavorite }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/${+isFavorite}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to add offer to favorites list' }));
       throw err;
     }
   }

@@ -14,8 +14,9 @@ import Loader from '../../components/loader/loader';
 import { getOffers, getOffersStatus } from '../../store/offers-data/selectors';
 import { getCurrentCity, getCurrentSortType } from '../../store/app-slice/selectors';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
-import { fetchOffersAction } from '../../store/api-actions';
+import { fetchFavoritesAction, fetchOffersAction } from '../../store/api-actions';
 import ErrorPage from '../error-page/error-page';
+import { getAuthStatus } from '../../store/user-slice/selectors';
 
 function MainPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
@@ -24,6 +25,7 @@ function MainPage(): JSX.Element {
   const sortType = useAppSelector(getCurrentSortType);
   const offersByCity = getOffersByCity(city, offers);
   const sortedOffers = getSortedOffers(offersByCity, sortType);
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
   const isEmpty = !offersByCity.length;
 
@@ -32,7 +34,11 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-  }, [dispatch]);
+
+    if (authorizationStatus.isAuthorizated) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   const onCardHover = (offerId: number | null): void => {
     setSelectedOfferId(offerId);
