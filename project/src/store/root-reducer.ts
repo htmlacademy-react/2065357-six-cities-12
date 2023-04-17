@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../const';
 import { AppSlice } from './app-slice/app-slice';
-import { commentsData } from './comments-data/comments-data';
+import { commentsData } from './comments-slice/comments-slice';
 import { favoritesSlice } from './favorites-slice/favorites-slice';
 import { nearOffersData } from './near-offers-data/near-offers-data';
 import { notificationsSlice } from './notifications-slice/notifications-slice';

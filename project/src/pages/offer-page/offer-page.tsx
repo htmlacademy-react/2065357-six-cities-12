@@ -18,7 +18,7 @@ import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '..
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
 import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
-import { getComments, getCommentsFetchStatus } from '../../store/comments-data/selectors';
+import { getComments, getCommentsFetchStatus } from '../../store/comments-slice/selectors';
 import { getSortedComments } from '../../utils/comment';
 
 function OfferPage(): JSX.Element {
