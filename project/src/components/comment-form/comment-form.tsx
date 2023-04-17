@@ -26,7 +26,7 @@ function CommentForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = Number(useParams().id);
 
-  const isDisabledButton = MIN_AMOUNT_SYMBOLS < formData.review.length || formData.review.length < MAX_AMOUNT_SYMBOLS || !+formData.rating || postCommentStatus.isLoading;
+  const isDisabledButton = MIN_AMOUNT_SYMBOLS > formData.review.length || formData.review.length > MAX_AMOUNT_SYMBOLS || !+formData.rating || postCommentStatus.isLoading;
 
   useEffect(() => {
     if (postCommentStatus.isSuccess) {
