@@ -109,9 +109,14 @@ export const sendCommentAction = createAsyncThunk<Comment[], CommentData, ThunkO
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOptions>(
   'user/checkAuth',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<UserData>(APIRoute.Login);
+    try {
+      const { data } = await api.get<UserData>(APIRoute.Login);
+      dispatch(fetchFavoritesAction());
 
-    return data;
+      return data;
+    } catch {
+      throw new Error();
+    }
   },
 );
 
@@ -123,6 +128,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
       saveToken(data.token);
       dispatch(redirectToRoute(AppRoute.Main));
       dispatch(pushNotification({ type: 'success', message: 'Login success' }));
+      dispatch(fetchFavoritesAction());
 
       return data;
     } catch (err) {
