@@ -1,14 +1,14 @@
 import { Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/layout';
 import LoginForm from '../../components/login-form/login-form';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getAuthStatus } from '../../store/reducers/user/selectors';
 
-type LoginPageProps = {
-  authorizationStatus: AuthorizationStatus;
-}
+function LoginPage(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthStatus);
 
-function LoginPage({ authorizationStatus }: LoginPageProps): JSX.Element {
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (authorizationStatus.isAuth) {
     return (
       <Navigate to={AppRoute.Main} />
     );

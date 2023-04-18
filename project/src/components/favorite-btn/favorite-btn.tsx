@@ -31,7 +31,7 @@ function FavoriteButton({ className, id, isFavorite }: FavoriteButtonProps): JSX
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (authorizationStatus.isAuthorizated) {
+    if (authorizationStatus.isAuth) {
       dispatch(toggleFavoriteAction({ id: id, isFavorite: !isFavorite }));
     } else {
       navigate(AppRoute.Login);

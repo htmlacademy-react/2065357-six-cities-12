@@ -12,5 +12,6 @@ export const getLoginStatus = createSelector([getStatus], (status) => ({
 }));
 
 export const getAuthStatus = createSelector([getAuthorizationStatus], (status) => ({
-  isAuthorizated: status === AuthorizationStatus.Auth,
+  isAuth: status === AuthorizationStatus.Auth,
+  isLoading: status === AuthorizationStatus.Unknown
 }));

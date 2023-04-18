@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import MainPage from '../../pages/main-page/main-page';
 import { checkAuthAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/reducers/user/selectors';
+import { getAuthStatus } from '../../store/reducers/user/selectors';
 import HistoryRouter from '../history-router/history-router';
 import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';
@@ -18,12 +18,16 @@ const OfferPage = lazy(() => import('../../pages/offer-page/offer-page'));
 const Page404 = lazy(() => import('../../pages/page-404/page-404'));
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(checkAuthAction());
   }, [dispatch]);
+
+  if (authorizationStatus.isLoading) {
+    return <Loader isSmall={false} />;
+  }
 
   return (
     <Suspense fallback={<Loader isSmall={false} />}>
@@ -37,9 +41,7 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute
-                  authorizationStatus={authorizationStatus}
-                >
+                <PrivateRoute>
                   <FavoritesPage />
                 </PrivateRoute>
               }
@@ -54,7 +56,7 @@ function App(): JSX.Element {
             />
             <Route
               path={AppRoute.Login}
-              element={<LoginPage authorizationStatus={authorizationStatus} />}
+              element={<LoginPage />}
             />
           </Routes>
         </HistoryRouter>
