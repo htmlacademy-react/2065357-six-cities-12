@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Offer } from '../../../types/offer';
 import { Cities, NameSpace, SortType } from '../../../const';
 
 const DEFAULT_CITY = Cities.Paris;
@@ -7,13 +6,11 @@ const DEFAULT_SORT_TYPE = SortType.Popular;
 
 type InitialState = {
   city: Cities;
-  offers: Offer[];
   sortType: SortType;
 }
 
 const initialState: InitialState = {
   city: DEFAULT_CITY,
-  offers: [],
   sortType: DEFAULT_SORT_TYPE
 };
 
