@@ -6,26 +6,22 @@ import Sort from '../../components/sort/sort';
 import Tabs from '../../components/tabs/tabs';
 import { OfferCardType } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getOffersByCity } from '../../utils/common';
-import { getSortedOffers } from '../../utils/sort';
 import cn from 'classnames';
 import EmptyMessage from '../../components/empty-message/empty-message';
 import Loader from '../../components/loader/loader';
-import { getOffers, getOffersStatus } from '../../store/reducers/offers/selectors';
+import { getOffersStatus, getRenderedOffers } from '../../store/reducers/offers/selectors';
 import { getCurrentCity, getCurrentSortType } from '../../store/reducers/app/selectors';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { fetchOffersAction } from '../../store/api-actions';
 import ErrorPage from '../error-page/error-page';
 
 function MainPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
   const status = useAppSelector(getOffersStatus);
   const city = useAppSelector(getCurrentCity);
   const sortType = useAppSelector(getCurrentSortType);
-  const offersByCity = getOffersByCity(city, offers);
-  const sortedOffers = getSortedOffers(offersByCity, sortType);
+  const renderedOffers = useAppSelector(getRenderedOffers);
 
-  const isEmpty = !offersByCity.length;
+  const isEmpty = !renderedOffers.length;
 
   const [selectedOfferId, setSelectedOfferId] = useState<number | null>(null);
   const dispatch = useAppDispatch();
@@ -60,12 +56,12 @@ function MainPage(): JSX.Element {
               : (
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{sortedOffers.length} places to stay in {city}</b>
+                  <b className="places__found">{renderedOffers.length} places to stay in {city}</b>
 
                   <Sort currentSortType={sortType} />
 
                   <OffersList
-                    offers={sortedOffers}
+                    offers={renderedOffers}
                     classNames="cities__places-list places__list"
                     offerCardType={OfferCardType.Main}
                     onCardHover={onCardHover}
@@ -76,8 +72,8 @@ function MainPage(): JSX.Element {
               {!isEmpty && (
                 <Map
                   className="cities"
-                  location={sortedOffers[0].city.location}
-                  offers={sortedOffers}
+                  location={renderedOffers[0].city.location}
+                  offers={renderedOffers}
                   selectedOfferId={selectedOfferId}
                 />)}
             </div>

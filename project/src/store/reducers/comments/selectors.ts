@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { NameSpace, Status } from '../../../const';
 import { Comment } from '../../../types/comment';
 import { State } from '../../../types/store';
+import { getSortedComments } from '../../../utils/comment';
 
 export const getComments = (state: State): Comment[] => state[NameSpace.Comments].comments;
 export const getFetchStatus = (state: State): Status => state[NameSpace.Comments].fetchStatus;
@@ -16,3 +17,5 @@ export const getPostCommentStatus = createSelector([getPostStatus], (status) => 
   isSuccess: status === Status.Success,
   isError: status === Status.Error
 }));
+
+export const getRenderedComments = createSelector([getComments], (comments) => getSortedComments(comments));
