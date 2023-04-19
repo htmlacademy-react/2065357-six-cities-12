@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, Status } from '../../const';
-import { Offer } from '../../types/offer';
-import { fetchNearOffersAction } from '../api-actions';
+import { NameSpace, Status } from '../../../const';
+import { Offer } from '../../../types/offer';
+import { fetchNearOffersAction, logoutAction, toggleFavoriteAction } from '../../api-actions';
 
 type InitialState = {
   nearOffers: Offer[];
@@ -28,6 +28,18 @@ export const nearOffersData = createSlice({
       })
       .addCase(fetchNearOffersAction.rejected, (state) => {
         state.status = Status.Error;
+      })
+      .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+        state.nearOffers.forEach((offer) => {
+          if (offer.id === action.payload.id) {
+            offer.isFavorite = action.payload.isFavorite;
+          }
+        });
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.nearOffers.forEach((offer) => {
+          offer.isFavorite = false;
+        });
       });
   }
 });

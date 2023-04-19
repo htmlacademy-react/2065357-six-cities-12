@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { sendCommentAction } from '../../store/api-actions';
-import { getPostCommentStatus } from '../../store/comments-slice/selectors';
+import { getPostCommentStatus } from '../../store/reducers/comments/selectors';
 import Loader from '../loader/loader';
 
 const RATING_TITLES = [
@@ -17,7 +17,7 @@ const RATING_TITLES = [
 const MIN_AMOUNT_SYMBOLS = 50;
 const MAX_AMOUNT_SYMBOLS = 300;
 
-function PostCommentForm(): JSX.Element {
+function CommentForm(): JSX.Element {
   const [formData, setFormData] = useState({
     rating: '0',
     review: ''
@@ -26,11 +26,11 @@ function PostCommentForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const offerId = Number(useParams().id);
 
-  const isDisabledButton = MIN_AMOUNT_SYMBOLS < formData.review.length || formData.review.length < MAX_AMOUNT_SYMBOLS || !+formData.rating || postCommentStatus.isLoading;
+  const isDisabledButton = MIN_AMOUNT_SYMBOLS > formData.review.length || formData.review.length > MAX_AMOUNT_SYMBOLS || !+formData.rating || postCommentStatus.isLoading;
 
   useEffect(() => {
     if (postCommentStatus.isSuccess) {
-      setFormData({ ...formData, rating: '0', review: '' });
+      setFormData((prev) => ({ ...prev, rating: '0', review: '' }));
     }
   }, [postCommentStatus]);
 
@@ -115,4 +115,4 @@ function PostCommentForm(): JSX.Element {
   );
 }
 
-export default PostCommentForm;
+export default CommentForm;

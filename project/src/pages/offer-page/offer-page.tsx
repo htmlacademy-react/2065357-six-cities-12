@@ -11,15 +11,14 @@ import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getOffer, getOfferStatus } from '../../store/offer-data/selectors';
+import { getOffer, getOfferStatus } from '../../store/reducers/offer/selectors';
 import Loader from '../../components/loader/loader';
 import { useEffect } from 'react';
 import { fetchCommentsAction, fetchNearOffersAction, fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useParams } from 'react-router-dom';
-import { getNearOffers, getNearOffersStatus } from '../../store/near-offers-data/selectors';
-import { getComments, getCommentsFetchStatus } from '../../store/comments-slice/selectors';
-import { getSortedComments } from '../../utils/comment';
+import { getNearOffers, getNearOffersStatus } from '../../store/reducers/near-offers/selectors';
+import { getCommentsFetchStatus, getRenderedComments } from '../../store/reducers/comments/selectors';
 
 function OfferPage(): JSX.Element {
   const offer = useAppSelector(getOffer);
@@ -28,8 +27,7 @@ function OfferPage(): JSX.Element {
   const nearOffers = useAppSelector(getNearOffers);
   const nearOffersStatus = useAppSelector(getNearOffersStatus);
 
-  const comments = useAppSelector(getComments);
-  const sortedComments = getSortedComments(comments);
+  const comments = useAppSelector(getRenderedComments);
   const commentsFetchStatus = useAppSelector(getCommentsFetchStatus);
 
   const dispatch = useAppDispatch();
@@ -65,7 +63,7 @@ function OfferPage(): JSX.Element {
                   {offer.title}
                 </h1>
 
-                <FavoriteButton className="property" isFavorite={offer.isFavorite} />
+                <FavoriteButton className="property" id={offerId} isFavorite={offer.isFavorite} />
 
               </div>
               <div className="property__rating rating">
@@ -117,7 +115,7 @@ function OfferPage(): JSX.Element {
                 </div>
               </div>
 
-              <Comments comments={sortedComments} />
+              <Comments comments={comments} />
 
             </div>
           </div>

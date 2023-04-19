@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { loginAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getLoginStatus } from '../../store/user-slice/selectors';
+import { getLoginStatus } from '../../store/reducers/user/selectors';
 import Loader from '../loader/loader';
 
 const EMAIL_PATTERN = /^[_a-z0-9-+-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i;

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, Status } from '../../const';
-import { Comment } from '../../types/comment';
-import { fetchCommentsAction, sendCommentAction } from '../api-actions';
+import { NameSpace, Status } from '../../../const';
+import { Comment } from '../../../types/comment';
+import { fetchCommentsAction, sendCommentAction } from '../../api-actions';
 
 type InitialState = {
   comments: Comment[];

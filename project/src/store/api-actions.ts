@@ -1,20 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { Comment, CommentData } from '../types/comment';
-import { Offer } from '../types/offer';
-import { AppDispatch, State } from '../types/state';
+import { FavoriteOfferData, Offer } from '../types/offer';
+import { ThunkOptions } from '../types/store';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
-import { pushNotification } from './notifications-slice/notifications-slice';
+import { pushNotification } from './reducers/notifications/notifications';
 
-export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ThunkOptions>(
   'data/fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
     try {
@@ -27,11 +22,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   }
 );
 
-export const fetchOfferAction = createAsyncThunk<Offer, number, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const fetchOfferAction = createAsyncThunk<Offer, number, ThunkOptions>(
   'data/fetchOffer',
   async (offerId, { dispatch, extra: api }) => {
     try {
@@ -45,11 +36,7 @@ export const fetchOfferAction = createAsyncThunk<Offer, number, {
   }
 );
 
-export const fetchNearOffersAction = createAsyncThunk<Offer[], number, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const fetchNearOffersAction = createAsyncThunk<Offer[], number, ThunkOptions>(
   'data/fetchNearOffers',
   async (offerId, { dispatch, extra: api }) => {
     try {
@@ -63,11 +50,35 @@ export const fetchNearOffersAction = createAsyncThunk<Offer[], number, {
   }
 );
 
-export const fetchCommentsAction = createAsyncThunk<Comment[], number, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const fetchFavoritesAction = createAsyncThunk<Offer[], undefined, ThunkOptions>(
+  'data/fetchFavorites',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to load favorites offers' }));
+      throw err;
+    }
+  }
+);
+
+export const toggleFavoriteAction = createAsyncThunk<Offer, FavoriteOfferData, ThunkOptions>(
+  'data/toggleFavorite',
+  async ({ id, isFavorite }, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/${+isFavorite}`);
+
+      return data;
+    } catch (err) {
+      dispatch(pushNotification({ type: 'error', message: 'Failed to add offer to favorites list' }));
+      throw err;
+    }
+  }
+);
+
+export const fetchCommentsAction = createAsyncThunk<Comment[], number, ThunkOptions>(
   'data/fetchComments',
   async (offerId, { dispatch, extra: api }) => {
     try {
@@ -81,11 +92,7 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], number, {
   }
 );
 
-export const sendCommentAction = createAsyncThunk<Comment[], CommentData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const sendCommentAction = createAsyncThunk<Comment[], CommentData, ThunkOptions>(
   'data/sendComment',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
     try {
@@ -99,24 +106,21 @@ export const sendCommentAction = createAsyncThunk<Comment[], CommentData, {
   }
 );
 
-export const checkAuthAction = createAsyncThunk<UserData, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOptions>(
   'user/checkAuth',
   async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<UserData>(APIRoute.Login);
+    try {
+      const { data } = await api.get<UserData>(APIRoute.Login);
+      dispatch(fetchFavoritesAction());
 
-    return data;
+      return data;
+    } catch {
+      throw new Error();
+    }
   },
 );
 
-export const loginAction = createAsyncThunk<UserData, AuthData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
     try {
@@ -124,6 +128,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
       saveToken(data.token);
       dispatch(redirectToRoute(AppRoute.Main));
       dispatch(pushNotification({ type: 'success', message: 'Login success' }));
+      dispatch(fetchFavoritesAction());
 
       return data;
     } catch (err) {
@@ -133,11 +138,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
+export const logoutAction = createAsyncThunk<void, undefined, ThunkOptions>(
   'user/logout',
   async (_arg, { dispatch, extra: api }) => {
     try {
