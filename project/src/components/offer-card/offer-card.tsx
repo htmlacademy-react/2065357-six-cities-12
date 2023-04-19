@@ -5,6 +5,7 @@ import { AppRoute, OfferCardType } from '../../const';
 import { generatePath, Link } from 'react-router-dom';
 import FavoriteButton from '../favorite-btn/favorite-btn';
 import Mark from '../mark/mark';
+import { memo } from 'react';
 
 type OfferCardProps = {
   offerCardType: OfferCardType;
@@ -74,4 +75,4 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
   );
 }
 
-export default OfferCard;
+export default memo(OfferCard);

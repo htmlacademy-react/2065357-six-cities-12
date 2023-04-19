@@ -18,7 +18,7 @@ function OffersBoard(): JSX.Element {
 
   const onCardHover = useCallback((offerId: number | null): void => {
     setSelectedOfferId(offerId);
-  }, [sortType]);
+  }, []);
 
   return (
     <div className="cities">
