@@ -3,17 +3,17 @@ import { NameSpace, Status } from '../../../const';
 import { Offer } from '../../../types/offer';
 import { fetchOffersAction, logoutAction, toggleFavoriteAction } from '../../api-actions';
 
-type InitialState = {
+export type OffersSlice = {
   offers: Offer[];
   status: Status;
 };
 
-const initialState: InitialState = {
+const initialState: OffersSlice = {
   offers: [],
   status: Status.Idle
 };
 
-export const offersData = createSlice({
+export const offersSlice = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {},

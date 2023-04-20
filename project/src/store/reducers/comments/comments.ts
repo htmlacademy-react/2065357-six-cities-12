@@ -3,19 +3,19 @@ import { NameSpace, Status } from '../../../const';
 import { Comment } from '../../../types/comment';
 import { fetchCommentsAction, sendCommentAction } from '../../api-actions';
 
-type InitialState = {
+export type CommentSlice = {
   comments: Comment[];
   fetchStatus: Status;
   postStatus: Status;
 };
 
-const initialState: InitialState = {
+const initialState: CommentSlice = {
   comments: [],
   fetchStatus: Status.Idle,
   postStatus: Status.Idle
 };
 
-export const commentsData = createSlice({
+export const commentsSlice = createSlice({
   name: NameSpace.Comments,
   initialState,
   reducers: {},
