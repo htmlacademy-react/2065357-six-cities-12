@@ -4,7 +4,7 @@ type GoodsListProps = {
 
 function GoodsList({ goods }: GoodsListProps): JSX.Element {
   return (
-    <ul className="property__inside-list">
+    <ul className="property__inside-list" data-testId="goods-list">
       {goods.map((good) => (
         <li className="property__inside-item" key={good}>
           {good}

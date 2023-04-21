@@ -7,7 +7,7 @@ type OfferGalleryProps = {
 
 function OfferGallery({ images, type }: OfferGalleryProps): JSX.Element {
   return (
-    <div className="property__gallery">
+    <div className="property__gallery" data-testId="offer-gallery">
       {images.slice(0, MAX_IMAGES_COUNT).map((image) => (
         <div className="property__image-wrapper" key={image}>
           <img className="property__image" src={image} alt={type} />

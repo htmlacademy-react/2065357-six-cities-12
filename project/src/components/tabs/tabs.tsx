@@ -12,7 +12,7 @@ function Tabs({ currentCity }: TabsProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="tabs">
+    <div className="tabs" data-testId="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {Object.values(Cities).map((city) => (

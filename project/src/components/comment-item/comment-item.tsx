@@ -2,11 +2,11 @@ import { Comment } from '../../types/comment';
 import { convertDate, convertDateForDateTime } from '../../utils/comment';
 import { convertRatingToPercent } from '../../utils/offer';
 
-type CommentProp = {
+type CommentItemProps = {
   comment: Comment;
 }
 
-function CommentItem({ comment }: CommentProp): JSX.Element {
+function CommentItem({ comment }: CommentItemProps): JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

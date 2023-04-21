@@ -7,7 +7,7 @@ type LoaderProps = {
 
 function Loader({ isSmall = true }: LoaderProps): JSX.Element {
   return (
-    <div className={cn(!isSmall && classes.wrapper)}>
+    <div className={cn(!isSmall && classes.wrapper)} data-testId="loader">
       <div className={cn(classes.loader, isSmall && classes.small)}></div>
     </div>
   );
