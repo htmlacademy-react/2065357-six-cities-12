@@ -6,8 +6,8 @@ import { getOffersByCity } from '../../../utils/common';
 import { getSortedOffers } from '../../../utils/sort';
 import { getCurrentCity, getCurrentSortType } from '../app/selectors';
 
-export const getOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
-export const getStatus = (state: State): Status => state[NameSpace.Data].status;
+export const getOffers = (state: State): Offer[] => state[NameSpace.Offers].offers;
+export const getStatus = (state: State): Status => state[NameSpace.Offers].status;
 
 export const getOffersStatus = createSelector([getStatus], (status) => ({
   isLoading: [Status.Idle, Status.Loading].includes(status),

@@ -41,7 +41,7 @@ export enum Status {
 
 export enum NameSpace {
   App = 'APP',
-  Data = 'DATA',
+  Offers = 'OFFERS',
   Offer = 'OFFER',
   NearOffers = 'NEAR-OFFERS',
   Comments = 'COMMENTS',

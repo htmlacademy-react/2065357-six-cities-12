@@ -11,7 +11,7 @@ import { userSlice } from './reducers/user/user';
 
 export const rootReducer = combineReducers({
   [NameSpace.App]: appSlice.reducer,
-  [NameSpace.Data]: offersSlice.reducer,
+  [NameSpace.Offers]: offersSlice.reducer,
   [NameSpace.Offer]: offerSlice.reducer,
   [NameSpace.NearOffers]: nearOffersSlice.reducer,
   [NameSpace.Comments]: commentsSlice.reducer,

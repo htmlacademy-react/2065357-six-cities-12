@@ -1,14 +1,12 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
-import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import MainPage from '../../pages/main-page/main-page';
 import { checkAuthAction } from '../../store/api-actions';
 import { getAuthStatus } from '../../store/reducers/user/selectors';
-import HistoryRouter from '../history-router/history-router';
 import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';
 
@@ -32,34 +30,32 @@ function App(): JSX.Element {
   return (
     <Suspense fallback={<Loader isSmall={false} />}>
       <HelmetProvider>
-        <HistoryRouter history={browserHistory}>
-          <Routes>
-            <Route
-              path={AppRoute.Main}
-              element={<MainPage />}
-            />
-            <Route
-              path={AppRoute.Favorites}
-              element={
-                <PrivateRoute>
-                  <FavoritesPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.Offer}
-              element={<OfferPage />}
-            />
-            <Route
-              path='*'
-              element={<Page404 />}
-            />
-            <Route
-              path={AppRoute.Login}
-              element={<LoginPage />}
-            />
-          </Routes>
-        </HistoryRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<MainPage />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute>
+                <FavoritesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferPage />}
+          />
+          <Route
+            path='*'
+            element={<Page404 />}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginPage />}
+          />
+        </Routes>
       </HelmetProvider>
     </Suspense>
   );
