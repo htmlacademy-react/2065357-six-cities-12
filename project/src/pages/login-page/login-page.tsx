@@ -20,7 +20,7 @@ function LoginPage(): JSX.Element {
       className="page--gray page--login"
       hasNav={false}
     >
-      <main className="page__main page__main--login">
+      <main className="page__main page__main--login" data-testid="login-page">
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
