@@ -17,7 +17,7 @@ function Comments({ comments }: CommentsProp): JSX.Element {
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{renderedComments.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
       <CommentsList comments={renderedComments} />
       {authorizationStatus.isAuth && <CommentForm />}
     </section>
