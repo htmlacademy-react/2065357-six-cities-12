@@ -21,7 +21,7 @@ function OffersBoard(): JSX.Element {
   }, []);
 
   return (
-    <div className="cities">
+    <div className="cities" data-testid="offers-board">
       <div className={cn('cities__places-container container', isEmpty && 'cities__places-container--empty')}>
         {isEmpty ?
           <EmptyMessage currentCity={city} />

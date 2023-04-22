@@ -36,6 +36,7 @@ function OfferCard({ offerCardType, offer, onCardHover }: OfferCardProps): JSX.E
       className={`${offerCardType}__card place-card`}
       onMouseOver={() => onCardHover?.(offer.id)}
       onMouseOut={() => onCardHover?.(null)}
+      data-testid="offer-card"
     >
 
       {offer.isPremium && <Mark className="place-card__mark" text="Premium" />}

@@ -16,7 +16,7 @@ function Comments({ comments }: CommentsProp): JSX.Element {
   const renderedComments = getRenderedComments(comments, MAX_COMMENTS_COUNT);
 
   return (
-    <section className="property__reviews reviews">
+    <section className="property__reviews reviews" data-testid="comments">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
       <CommentsList comments={renderedComments} />
       {authorizationStatus.isAuth && <CommentForm />}
