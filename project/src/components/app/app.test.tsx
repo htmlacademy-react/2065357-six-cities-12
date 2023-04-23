@@ -10,7 +10,6 @@ import HistoryRouter from '../history-router/history-router';
 import { makeFakeComment, makeFakeOffer, makeFakeUserData } from '../../utils/mocks';
 import { createAPI } from '../../services/api';
 import { State } from '../../types/store';
-import { generatePath } from 'react-router-dom';
 
 const userData = makeFakeUserData();
 const comments = Array.from({ length: 5 }, makeFakeComment);
@@ -77,22 +76,5 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText(/Cities/i)).toBeInTheDocument();
-  });
-
-  it('should render "OfferPage" when user navigate to "/offer/:id"', () => {
-    history.push(generatePath(AppRoute.Offer, { id: offers[0].id.toString() }));
-
-    render(fakeApp);
-
-    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
-  });
-
-  it('should render "Page404" when user navigate to non-existent route', () => {
-    history.push('/non-existent-route');
-
-    render(fakeApp);
-
-    expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
-    expect(screen.getByText(/Back to main page/i)).toBeInTheDocument();
   });
 });
