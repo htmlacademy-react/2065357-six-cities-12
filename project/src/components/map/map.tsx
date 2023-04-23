@@ -54,7 +54,7 @@ function Map({ className, location, offers, selectedOfferId }: MapProps): JSX.El
   }, [map, offers, selectedOfferId, location]);
 
   return (
-    <section className={`${className}__map map`} ref={mapRef}></section>
+    <section className={`${className}__map map`} ref={mapRef} data-testid="map"></section>
   );
 }
 

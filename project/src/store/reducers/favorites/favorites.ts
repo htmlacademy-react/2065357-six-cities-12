@@ -3,12 +3,12 @@ import { NameSpace, Status } from '../../../const';
 import { Offer } from '../../../types/offer';
 import { fetchFavoritesAction, toggleFavoriteAction } from '../../api-actions';
 
-type InitialState = {
+export type FavoritesSlice = {
   favorites: Offer[];
   fetchStatus: Status;
 };
 
-const initialState: InitialState = {
+const initialState: FavoritesSlice = {
   favorites: [],
   fetchStatus: Status.Idle,
 };

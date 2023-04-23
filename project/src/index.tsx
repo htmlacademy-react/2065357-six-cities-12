@@ -6,6 +6,8 @@ import { store } from './store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotificationCard from './components/notification-card/notification-card';
+import HistoryRouter from './components/history-router/history-router';
+import browserHistory from './browser-history';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,9 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer />
-      <NotificationCard />
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer />
+        <NotificationCard />
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
 );

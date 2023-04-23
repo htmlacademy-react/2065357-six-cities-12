@@ -41,7 +41,7 @@ export enum Status {
 
 export enum NameSpace {
   App = 'APP',
-  Data = 'DATA',
+  Offers = 'OFFERS',
   Offer = 'OFFER',
   NearOffers = 'NEAR-OFFERS',
   Comments = 'COMMENTS',
@@ -58,3 +58,6 @@ export enum Cities {
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf'
 }
+
+export const DEFAULT_CITY = Cities.Paris;
+export const DEFAULT_SORT_TYPE = SortType.Popular;

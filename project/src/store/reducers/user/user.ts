@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace, Status } from '../../../const';
 import { checkAuthAction, loginAction, logoutAction } from '../../api-actions';
 
-type InitialState = {
+export type UserSlice = {
   authorizationStatus: AuthorizationStatus;
   login: string;
   avatarUrl: string;
   status: Status;
 };
 
-const initialState: InitialState = {
+const initialState: UserSlice = {
   authorizationStatus: AuthorizationStatus.Unknown,
   login: '',
   avatarUrl: '',

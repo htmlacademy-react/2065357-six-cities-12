@@ -5,7 +5,7 @@ type MarkProps = {
 
 function Mark({ className, text }: MarkProps): JSX.Element {
   return (
-    <div className={className}>
+    <div className={className} data-testid="mark">
       <span>{text}</span>
     </div>
   );

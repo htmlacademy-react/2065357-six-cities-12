@@ -3,17 +3,17 @@ import { NameSpace, Status } from '../../../const';
 import { Offer } from '../../../types/offer';
 import { fetchNearOffersAction, logoutAction, toggleFavoriteAction } from '../../api-actions';
 
-type InitialState = {
+export type NearOffersSlice = {
   nearOffers: Offer[];
   status: Status;
 };
 
-const initialState: InitialState = {
+const initialState: NearOffersSlice = {
   nearOffers: [],
   status: Status.Idle
 };
 
-export const nearOffersData = createSlice({
+export const nearOffersSlice = createSlice({
   name: NameSpace.NearOffers,
   initialState,
   reducers: {},

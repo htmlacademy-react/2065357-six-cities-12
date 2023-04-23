@@ -7,7 +7,7 @@ type CommentsListProp = {
 
 function CommentsList({ comments }: CommentsListProp): JSX.Element {
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid="comments-list">
       {comments.map((comment) => <CommentItem comment={comment} key={comment.id} />)}
     </ul>
   );
